@@ -40,4 +40,16 @@ public class Book {
     public int getNumberOfCopies() {
         return numberOfCopies;
     }
+
+    public static boolean isISBNUnique(String ISBN){
+    Book book = new Book("Java Programming", "John Doe", "978-0321776823", "Programming", "15/05/2020", 100);
+       if(book.getISBN().equalsIgnoreCase(ISBN))
+          return false;
+       else
+          return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isISBNUnique("978-0321576823"));
+    }
 }
