@@ -1,5 +1,9 @@
 package DS4Books;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class Book {
     private String title;
     private String author;
@@ -8,14 +12,14 @@ public class Book {
     private String publicationDate;
     private int numberOfCopies;
 
-   public Book(String bookTitle,String bookAuthor,String bookISBN,String bookGenre,String bookPublicationDate, int bookCopies){
-       this.title = bookTitle;
-       this.author = bookAuthor;
-       this.ISBN = bookISBN;
-       this.genre = bookGenre;
-       this.publicationDate = bookPublicationDate;
-       this.numberOfCopies = bookCopies;
-   }
+    public Book(String bookTitle, String bookAuthor, String bookISBN, String bookGenre, String bookPublicationDate, int bookCopies) {
+        this.title = bookTitle;
+        this.author = bookAuthor;
+        this.ISBN = bookISBN;
+        this.genre = bookGenre;
+        this.publicationDate = bookPublicationDate;
+        this.numberOfCopies = bookCopies;
+    }
 
     public String getTitle() {
         return title;
@@ -41,15 +45,20 @@ public class Book {
         return numberOfCopies;
     }
 
-    public static boolean isISBNUnique(String ISBN){
-    Book book = new Book("Java Programming", "John Doe", "978-0321776823", "Programming", "15/05/2020", 100);
-       if(book.getISBN().equalsIgnoreCase(ISBN))
-          return false;
-       else
-          return true;
+    public static boolean isISBNUnique(String ISBN, List<Book> bookList) {
+        for (Book bookItem : bookList) {
+            if (bookItem.getISBN().equalsIgnoreCase(ISBN))
+                return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
-        System.out.println(isISBNUnique("978-0321576823"));
+        List<Book> bookList = new ArrayList<>();
+        bookList.add(new Book("Java Programming", "John Doe", "978-0321776823", "Programming", "15/05/2020", 100));
+        if (isISBNUnique("978 - 1491919538", bookList))
+            bookList.add(new Book("Python Programming", "Jane Smith", "978-1491919538", "Programming", "21/08/1996", 50));
+        else
+            System.out.println("Book is already added");
     }
 }
