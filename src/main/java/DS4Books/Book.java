@@ -56,9 +56,11 @@ public class Book {
     public static void main(String[] args) {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("Java Programming", "John Doe", "978-0321776823", "Programming", "15/05/2020", 100));
-        if (isISBNUnique("978 - 1491919538", bookList))
+        if (isISBNUnique("978 - 1491919538", bookList)) {
             bookList.add(new Book("Python Programming", "Jane Smith", "978-1491919538", "Programming", "21/08/1996", 50));
-        else
+            System.out.println("New book is added to library");
+        } else {
             System.out.println("Book is already added");
+        }
     }
 }
