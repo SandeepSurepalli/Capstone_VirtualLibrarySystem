@@ -47,7 +47,7 @@ public class Book {
 
     public static boolean isISBNUnique(String ISBN, List<Book> bookList) {
         for (Book bookItem : bookList) {
-            if (bookItem.getISBN().equalsIgnoreCase(ISBN))
+            if (bookItem.getISBN().equals(ISBN))
                 return false;
         }
         return true;
@@ -55,12 +55,12 @@ public class Book {
 
     public static void main(String[] args) {
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("Java Programming", "John Doe", "978-0321776823", "Programming", "15/05/2020", 100));
-        if (isISBNUnique("978 - 1491919538", bookList)) {
-            bookList.add(new Book("Python Programming", "Jane Smith", "978-1491919538", "Programming", "21/08/1996", 50));
+        bookList.add(new Book("Java Programming", "John Doe", "9780321776823", "Programming", "15/05/2020", 100));
+        if (isISBNUnique("9780321776823", bookList)) {
+            bookList.add(new Book("Python Programming", "Jane Smith", "9781491919538", "Programming", "21/08/1996", 50));
             System.out.println("New book is added to library");
         } else {
-            System.out.println("Book is already added");
+            System.out.println("Book is already exist in library");
         }
     }
 }
