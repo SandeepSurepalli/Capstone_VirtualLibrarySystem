@@ -1,0 +1,186 @@
+[
+  {
+    "title": "Java Programming",
+    "author": "John Doe",
+    "ISBN": "9780321776823",
+    "genre": "Programming",
+    "publicationDate": "2020-05-15",
+    "numberOfCopies": 100
+  },
+  {
+    "title": "Python Programming",
+    "author": "Jane Smith",
+    "ISBN": "9781491919538",
+    "genre": "Programming",
+    "publicationDate": "2016-11-30",
+    "numberOfCopies": 50
+  },
+  {
+    "title": "Data Structures and Algorithms",
+    "author": "Alice Johnson",
+    "ISBN": "9780262033848",
+    "genre": "Computer Science",
+    "publicationDate": "2021-08-20",
+    "numberOfCopies": 80
+  },
+  {
+    "title": "JavaScript Basics",
+    "author": "Mark Williams",
+    "ISBN": "9781593279509",
+    "genre": "Web Development",
+    "publicationDate": "2018-04-10",
+    "numberOfCopies": 60
+  },
+  {
+    "title": "Java Programming",
+    "author": "David Brown",
+    "ISBN": "9780321776823",
+    "genre": "Programming",
+    "publicationDate": "2019-06-25",
+    "numberOfCopies": 120
+  },
+  {
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "ISBN": "9780132350884",
+    "genre": "Software Development",
+    "publicationDate": "2008-08-11",
+    "numberOfCopies": 30
+  },
+  {
+    "title": "Design Patterns",
+    "author": "Erich Gamma",
+    "ISBN": "9780201633610",
+    "genre": "Software Design",
+    "publicationDate": "1994-11-10",
+    "numberOfCopies": 40
+  },
+  {
+    "title": "Data Structures and Algorithms",
+    "author": "Alice Johnson",
+    "ISBN": "9780262033848",
+    "genre": "Computer Science",
+    "publicationDate": "2021-08-20",
+    "numberOfCopies": 70
+  },
+  {
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt",
+    "ISBN": "9780201616224",
+    "genre": "Software Development",
+    "publicationDate": "1999-10-20",
+    "numberOfCopies": 50
+  },
+  {
+    "title": "Cracking the Coding Interview",
+    "author": "Gayle Laakmann McDowell",
+    "ISBN": "9780984782857",
+    "genre": "Interview Preparation",
+    "publicationDate": "2015-07-01",
+    "numberOfCopies": 90
+  },
+  {
+    "title": "Java Programming",
+    "author": "John Doe",
+    "ISBN": "9780321776823",
+    "genre": "Programming",
+    "publicationDate": "2017-12-15",
+    "numberOfCopies": 110
+  },
+  {
+    "title": "Effective Java",
+    "author": "Joshua Bloch",
+    "ISBN": "9780134685991",
+    "genre": "Java Programming",
+    "publicationDate": "2018-12-27",
+    "numberOfCopies": 40
+  },
+  {
+    "title": "Java Programming",
+    "author": "David Brown",
+    "ISBN": "9780321776823",
+    "genre": "Programming",
+    "publicationDate": "2019-06-25",
+    "numberOfCopies": 120
+  },
+  {
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "ISBN": "9780132350884",
+    "genre": "Software Development",
+    "publicationDate": "2008-08-11",
+    "numberOfCopies": 30
+  },
+  {
+    "title": "Java Programming",
+    "author": "John Doe",
+    "ISBN": "9780321776823",
+    "genre": "Programming",
+    "publicationDate": "2021-03-20",
+    "numberOfCopies": 130
+  },
+  {
+    "title": "Data Structures and Algorithms",
+    "author": "Alice Johnson",
+    "ISBN": "9780262033848",
+    "genre": "Computer Science",
+    "publicationDate": "2021-08-20",
+    "numberOfCopies": 80
+  },
+  {
+    "title": "Python Programming",
+    "author": "Jane Smith",
+    "ISBN": "9781491919538",
+    "genre": "Programming",
+    "publicationDate": "2016-11-30",
+    "numberOfCopies": 60
+  },
+  {
+    "title": "Effective Java",
+    "author": "Joshua Bloch",
+    "ISBN": "9780134685991",
+    "genre": "Java Programming",
+    "publicationDate": "2018-12-27",
+    "numberOfCopies": 45
+  },
+  {
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "ISBN": "9780132350884",
+    "genre": "Software Development",
+    "publicationDate": "2008-08-11",
+    "numberOfCopies": 35
+  },
+  {
+    "title": "Effective Java",
+    "author": "Joshua Bloch",
+    "ISBN": "9780134685991",
+    "genre": "Java Programming",
+    "publicationDate": "2018-12-27",
+    "numberOfCopies": 50
+  },
+  {
+    "title": "Java Programming",
+    "author": "John Doe",
+    "ISBN": "9780321776823",
+    "genre": "Programming",
+    "publicationDate": "2020-08-15",
+    "numberOfCopies": 140
+  },
+  {
+    "title": "Python Programming",
+    "author": "Jane Smith",
+    "ISBN": "9781491919538",
+    "genre": "Programming",
+    "publicationDate": "2016-11-30",
+    "numberOfCopies": 70
+  },
+  {
+    "title": "Data Structures and Algorithms",
+    "author": "Alice Johnson",
+    "ISBN": "9780262033848",
+    "genre": "Computer Science",
+    "publicationDate": "2021-08-20",
+    "numberOfCopies": 90
+  }
+]
