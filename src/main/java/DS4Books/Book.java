@@ -10,9 +10,9 @@ public class Book {
     private String ISBN;
     private String genre;
     private String publicationDate;
-    private int numberOfCopies;
+    private long numberOfCopies;
 
-    public Book(String bookTitle, String bookAuthor, String bookISBN, String bookGenre, String bookPublicationDate, int bookCopies) {
+    public Book(String bookTitle, String bookAuthor, String bookISBN, String bookGenre, String bookPublicationDate, long bookCopies) {
         this.title = bookTitle;
         this.author = bookAuthor;
         this.ISBN = bookISBN;
@@ -41,7 +41,7 @@ public class Book {
         return publicationDate;
     }
 
-    public int getNumberOfCopies() {
+    public long getNumberOfCopies() {
         return numberOfCopies;
     }
 
