@@ -39,7 +39,7 @@ public class BookManager {
         try {
             FileReader file = new FileReader(filePath);
             booksData = (JSONArray) parser.parse(file);
-            aadBookToLibrary();
+            addBookToLibrary();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,7 +53,7 @@ public class BookManager {
         return true;
     }
 
-    public static void aadBookToLibrary() {
+    public static void addBookToLibrary() {
 
         Books[0] = booksData.size();
         for (Object o : booksData) {
