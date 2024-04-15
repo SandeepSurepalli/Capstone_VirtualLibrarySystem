@@ -1,0 +1,42 @@
+Title,Author,ISBN,Genre,Publication Date,Number of Copies
+Java Programming,John Doe,9780321776823,Programming,2020-05-15,100
+Python Programming,Jane Smith,9781491919538,Programming,2016-11-30,50
+Data Structures and Algorithms,David Johnson,9780262033848,Computer Science,2018-09-20,75
+JavaScript Basics,Sarah Williams,9781787125647,Web Development,2019-07-10,60
+HTML and CSS Mastery,Michael Brown,9780987465312,Web Development,2017-03-25,45
+Clean Code,Robert Martin,9780132350884,Software Engineering,2015-01-15,80
+Java in Action,James Wilson,9781617291999,Programming,2016-08-30,55
+Python Cookbook,Linda Davis,9781449340377,Programming,2017-12-05,65
+Data Science Essentials,Emily Miller,9781491907375,Data Science,2018-04-15,70
+Web Design Fundamentals,Thomas Clark,9780321929094,Web Development,2016-05-20,40
+Clean Architecture,John Smith,9780134494166,Software Engineering,2017-09-10,85
+HTML5 Mastery,Anna Jones,9781785886265,Web Development,2018-11-05,55
+Python Data Analysis,William White,9781787280748,Data Science,2019-02-25,60
+JavaScript Advanced Techniques,Emma Anderson,9781118531648,Web Development,2016-06-30,50
+Java Design Patterns,Chris Johnson,9781119978196,Programming,2015-03-10,70
+CSS3 Mastery,Kevin Lewis,9780986085195,Web Development,2017-08-15,45
+Data Structures in C,Mark Thompson,9780321165810,Computer Science,2018-10-30,75
+Software Testing Fundamentals,Carolyn Green,9781491900697,Software Engineering,2017-04-20,80
+Machine Learning Basics,Richard Martinez,9781783988365,Data Science,2018-06-10,65
+React.js Essentials,Samantha Taylor,9781783558551,Web Development,2016-09-25,55
+Java Concurrency in Practice,Brian Goetz,9780321349606,Programming,2015-05-20,65
+Python Machine Learning,Jason Brownlee,9781783555130,Data Science,2017-10-15,75
+CSS Flexbox and Grid,Kelly Adams,9780987465329,Web Development,2018-03-05,50
+JavaFX Essentials,Stephen Roberts,9781783553570,Programming,2016-07-15,60
+Web Security Fundamentals,David Moore,9781786464580,Web Development,2017-11-20,45
+Introduction to Algorithms,Thomas Cormen,9780262033848,Computer Science,2018-09-20,80
+Software Development Principles,Mary Johnson,9781617291999,Software Engineering,2016-08-30,55
+Deep Learning Basics,John Brown,9781449340377,Data Science,2017-12-05,65
+JavaScript Frameworks,Andrew Thompson,9781787125647,Web Development,2019-07-10,60
+Java EE Essentials,Sarah Lewis,9780321776823,Programming,2020-05-15,100
+Python GUI Programming,Kevin Hill,9781491919538,Programming,2016-11-30,50
+Big Data Analytics,Chris Carter,9780262033848,Data Science,2018-09-20,75
+Responsive Web Design,Emma Wilson,9780987465312,Web Development,2017-03-25,45
+Software Engineering Principles,Michael Davis,9780132350884,Software Engineering,2015-01-15,80
+Advanced Java Programming,Thomas Wilson,9781617291999,Programming,2016-08-30,55
+Data Visualization Techniques,Emily Brown,9781491907375,Data Science,2018-04-15,70
+Modern Web Development,James Clark,9780321929094,Web Development,2016-05-20,40
+Secure Software Development,John Moore,9780134494166,Software Engineering,2017-09-10,85
+Advanced CSS Techniques,Sarah Lewis,9781785886265,Web Development,2018-11-05,55
+Python Automation,David Taylor,9781787280748,Data Science,2019-02-25,60
+Web Development Best Practices,Linda Anderson,9781118531648,Web Development,2016-06-30,50

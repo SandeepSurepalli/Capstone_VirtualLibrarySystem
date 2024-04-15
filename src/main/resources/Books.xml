@@ -1,0 +1,42 @@
+<library>
+    <book>
+        <title>Java Programming</title>
+        <author>John Doe</author>
+        <ISBN>9780321776823</ISBN>
+        <genre>Programming</genre>
+        <publicationDate>2020-05-15</publicationDate>
+        <numberOfCopies>100</numberOfCopies>
+    </book>
+    <book>
+        <title>Python Programming</title>
+        <author>Jane Smith</author>
+        <ISBN>9781491919538</ISBN>
+        <genre>Programming</genre>
+        <publicationDate>2016-11-30</publicationDate>
+        <numberOfCopies>50</numberOfCopies>
+    </book>
+    <book>
+        <title>Data Structures and Algorithms</title>
+        <author>Bob Williams</author>
+        <ISBN>9780262033848</ISBN>
+        <genre>Computer Science</genre>
+        <publicationDate>2017-04-10</publicationDate>
+        <numberOfCopies>60</numberOfCopies>
+    </book>
+    <book>
+        <title>JavaScript Basics</title>
+        <author>Sarah Williams</author>
+        <ISBN>9781787125647</ISBN>
+        <genre>Web Development</genre>
+        <publicationDate>2019-07-10</publicationDate>
+        <numberOfCopies>60</numberOfCopies>
+    </book>
+    <book>
+        <title>HTML and CSS Mastery</title>
+        <author>Michael Brown</author>
+        <ISBN>9780987465312</ISBN>
+        <genre>Web Development</genre>
+        <publicationDate>2017-03-25</publicationDate>
+        <numberOfCopies>45</numberOfCopies>
+    </book>
+</library>
