@@ -10,12 +10,12 @@ public class SearchBook {
     public String getBookDetailsFromUser() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter book title, ISBN number or author name to search in virtual library" + "\n");
-        String bookDetails = sc.nextLine();
-        return bookDetails;
+        String searchTerm = sc.nextLine();
+        return searchTerm;
     }
 
     public void searchBookInLibrary(List<Book> bookList) {
-        String bookTobeSearched = getBookDetailsFromUser();
+        String searchTerm = getBookDetailsFromUser();
         for (Book bookItem : bookList) {
             String title = bookItem.getTitle();
             String author = bookItem.getAuthor();
@@ -23,22 +23,22 @@ public class SearchBook {
             String genre = bookItem.getGenre();
             String publicationDate = bookItem.getPublicationDate();
             long numberOfCopies = bookItem.getNumberOfCopies();
-            if (title.equalsIgnoreCase(bookTobeSearched) || title.toLowerCase().contains(bookTobeSearched.toLowerCase()))
+            if (title.equalsIgnoreCase(searchTerm) || title.toLowerCase().contains(searchTerm.toLowerCase()))
                 matchedBooks.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
-            else if (author.equalsIgnoreCase(bookTobeSearched) || author.toLowerCase().contains(bookTobeSearched.toLowerCase()))
+            else if (author.equalsIgnoreCase(searchTerm) || author.toLowerCase().contains(searchTerm.toLowerCase()))
                 matchedBooks.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
-            else if (ISBN.equalsIgnoreCase(bookTobeSearched))
+            else if (ISBN.equalsIgnoreCase(searchTerm))
                 matchedBooks.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
         }
-        printSearchedBook(bookTobeSearched);
+        printSearchedBook(searchTerm);
     }
 
-    public void printSearchedBook(String bookTobeSearched) {
+    public void printSearchedBook(String searchTerm) {
         if (matchedBooks.isEmpty()) System.out.println("No books found");
         else {
             if (matchedBooks.size() == 1) System.out.println("Only 1 book found in library");
             else
-                System.out.println(matchedBooks.size() + " books are found in library which are matching the search " + bookTobeSearched);
+                System.out.println(matchedBooks.size() + " books are found in library which are matching the search " + searchTerm);
             System.out.println("--------------------------------------");
             for (Book bookItem : matchedBooks) {
                 String title = bookItem.getTitle();

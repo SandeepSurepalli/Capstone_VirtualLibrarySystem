@@ -1,6 +1,7 @@
 package DS4Books;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class BookManager {
             }
             System.out.println("Welcome to virtual library");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error parsing the file: " + e.getMessage());
         }
     }
 
@@ -94,7 +95,7 @@ public class BookManager {
             Books[0] = counter;
             System.out.println("Welcome to virtual library");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error parsing the file: " + e.getMessage());
         }
     }
 
