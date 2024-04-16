@@ -27,7 +27,7 @@ public class BookManager {
 
     public BookManager(String filePath) {
         fileType = com.google.common.io.Files.getFileExtension(filePath);
-        System.out.println("Reading data from " + fileType);
+//        System.out.println("Reading data from " + fileType);
         if (fileType.equalsIgnoreCase("json")) readJSONFile(filePath);
         else if (fileType.equalsIgnoreCase("csv")) readCSVFile(filePath);
         else if (fileType.equalsIgnoreCase("xml")) readXMLFile(filePath);
@@ -39,7 +39,18 @@ public class BookManager {
         try {
             FileReader file = new FileReader(filePath);
             booksData = (JSONArray) parser.parse(file);
-            addBookToLibrary();
+            Books[0] = booksData.size();
+            for (Object o : booksData) {
+                JSONObject bookObject = (JSONObject) o;
+                String title = (String) bookObject.get("title");
+                String author = (String) bookObject.get("author");
+                String ISBN = (String) bookObject.get("ISBN");
+                String genre = (String) bookObject.get("genre");
+                String publicationDate = (String) bookObject.get("publicationDate");
+                long numberOfCopies = (long) bookObject.get("numberOfCopies");
+                addBookToLibrary(title, author, ISBN, genre, publicationDate, numberOfCopies);
+            }
+            System.out.println("Welcome to virtual library");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,26 +64,13 @@ public class BookManager {
         return true;
     }
 
-    public static void addBookToLibrary() {
+    public static void addBookToLibrary(String title, String author, String ISBN, String genre, String publicationDate, long numberOfCopies) {
 
-        Books[0] = booksData.size();
-        for (Object o : booksData) {
-            JSONObject bookObject = (JSONObject) o;
-            String title = (String) bookObject.get("title");
-            String author = (String) bookObject.get("author");
-            String ISBN = (String) bookObject.get("ISBN");
-            String genre = (String) bookObject.get("genre");
-            String publicationDate = (String) bookObject.get("publicationDate");
-            long numberOfCopies = (long) bookObject.get("numberOfCopies");
-
-            if (isISBNUnique(ISBN, bookList)) {
-                bookList.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
-            } else {
-                noOfDuplicateBooks++;
-            }
+        if (isISBNUnique(ISBN, bookList)) {
+            bookList.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
+        } else {
+            noOfDuplicateBooks++;
         }
-        Books[1] = Books[0] - noOfDuplicateBooks;
-        Books[2] = noOfDuplicateBooks;
     }
 
     public static void readCSVFile(String filePath) {
@@ -91,15 +89,10 @@ public class BookManager {
                 String genre = bookDetails[3];
                 String publicationDate = bookDetails[4];
                 long numberOfCopies = Long.parseLong(bookDetails[5]);
-                if (isISBNUnique(ISBN, bookList)) {
-                    bookList.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
-                } else {
-                    noOfDuplicateBooks++;
-                }
+                addBookToLibrary(title, author, ISBN, genre, publicationDate, numberOfCopies);
             }
             Books[0] = counter;
-            Books[1] = Books[0] - noOfDuplicateBooks;
-            Books[2] = noOfDuplicateBooks;
+            System.out.println("Welcome to virtual library");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -114,7 +107,7 @@ public class BookManager {
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("book");
             Books[0] = nList.getLength();
-            for (int temp = 0; temp <  Books[0]; temp++) {
+            for (int temp = 0; temp < Books[0]; temp++) {
                 Node nNode = nList.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
@@ -124,24 +117,27 @@ public class BookManager {
                     String genre = eElement.getElementsByTagName("genre").item(0).getTextContent();
                     String publicationDate = eElement.getElementsByTagName("publicationDate").item(0).getTextContent();
                     long numberOfCopies = Long.parseLong(eElement.getElementsByTagName("numberOfCopies").item(0).getTextContent());
-                    if (isISBNUnique(ISBN, bookList)) {
-                        bookList.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
-                    } else {
-                        noOfDuplicateBooks++;
-                    }
+                    addBookToLibrary(title, author, ISBN, genre, publicationDate, numberOfCopies);
                 }
             }
-
-            Books[1] = Books[0] - noOfDuplicateBooks;
-            Books[2] = noOfDuplicateBooks;
+            System.out.println("Welcome to virtual library");
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void Books() {
+    public void Books() {
+        Books[1] = Books[0] - noOfDuplicateBooks;
+        Books[2] = noOfDuplicateBooks;
         System.out.println(Books[1] + " are added to library");
         System.out.println(Books[2] + " are not added due to duplicate");
     }
 
+    public List<Book> getBookList() {
+        if (bookList.isEmpty()) {
+            System.out.println("Library is not loaded");
+            return null;
+        }
+        return bookList;
+    }
 }

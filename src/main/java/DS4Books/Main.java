@@ -10,6 +10,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -17,7 +19,9 @@ public class Main {
         System.out.println("Starting from Here ");
         String filePath = "src//main//resources//Books.csv";
         BookManager BM = new BookManager(filePath);
-        BM.Books();
+        List<Book> bookList = BM.getBookList();
+        SearchBook sb = new SearchBook();
+        sb.searchBookInLibrary(bookList);
     }
 
 
