@@ -1,7 +1,6 @@
 package DS4Books;
 
 import java.io.*;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class BookManager {
 
     public BookManager(String filePath) {
         fileType = com.google.common.io.Files.getFileExtension(filePath);
-//        System.out.println("Reading data from " + fileType);
         if (fileType.equalsIgnoreCase("json")) readJSONFile(filePath);
         else if (fileType.equalsIgnoreCase("csv")) readCSVFile(filePath);
         else if (fileType.equalsIgnoreCase("xml")) readXMLFile(filePath);
@@ -57,7 +55,6 @@ public class BookManager {
         }
     }
 
-    //
     public static boolean isISBNUnique(String ISBN, List<Book> bookList) {
         for (Book bookItem : bookList) {
             if (bookItem.getISBN().equals(ISBN)) return false;
@@ -141,4 +138,5 @@ public class BookManager {
         }
         return bookList;
     }
+
 }

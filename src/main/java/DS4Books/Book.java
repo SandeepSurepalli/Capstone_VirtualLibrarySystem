@@ -1,9 +1,5 @@
 package DS4Books;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 public class Book {
     private String title;
     private String author;
@@ -45,22 +41,27 @@ public class Book {
         return numberOfCopies;
     }
 
-    public static boolean isISBNUnique(String ISBN, List<Book> bookList) {
-        for (Book bookItem : bookList) {
-            if (bookItem.getISBN().equals(ISBN))
-                return false;
-        }
-        return true;
+    public void setPublicationDate(String publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
-    public static void main(String[] args) {
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("Java Programming", "John Doe", "9780321776823", "Programming", "15/05/2020", 100));
-        if (isISBNUnique("9780321776823", bookList)) {
-            bookList.add(new Book("Python Programming", "Jane Smith", "9781491919538", "Programming", "21/08/1996", 50));
-            System.out.println("New book is added to library");
-        } else {
-            System.out.println("Book is already exist in library");
-        }
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setNumberOfCopies(long numberOfCopies) {
+        this.numberOfCopies = numberOfCopies;
+    }
+
+    public String toString() {
+        return "Title: " + getTitle() + "\n" + "Author: " + getAuthor() + "\n" + "ISBN: " + getISBN() + "\n" + "Genre: " + getGenre() + "\n" + "Publication Date: " + getPublicationDate() + "\n" + "Number of Copies: " + getNumberOfCopies() + "\n" + "--------------------------------------";
     }
 }

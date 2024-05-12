@@ -6,8 +6,12 @@ import java.util.Scanner;
 
 public class SearchBook {
     public List<Book> matchedBooks = new ArrayList<Book>();
-
+    List<Book> bookList;
     public List<Book> filterBooks = new ArrayList<>();
+
+    public SearchBook(List<Book> bookList) {
+        this.bookList = bookList;
+    }
 
     public String getBookDetailsFromUser() {
         Scanner sc = new Scanner(System.in);
@@ -16,7 +20,7 @@ public class SearchBook {
         return searchTerm;
     }
 
-    public void searchBookInLibrary(List<Book> bookList) {
+    public void searchBookInLibrary() {
         String searchTerm = getBookDetailsFromUser();
         for (Book bookItem : bookList) {
             String title = bookItem.getTitle();
@@ -36,33 +40,28 @@ public class SearchBook {
     }
 
     public void printSearchedBook(String searchTerm, List<Book> booksList) {
+        Scanner sc = new Scanner(System.in);
         if (booksList.isEmpty()) System.out.println("No books found");
         else {
-            if (booksList.size() == 1) System.out.println("Only 1 book found in library");
-            else
+            if (booksList.size() == 1) {
+                System.out.println("Only 1 book found in library.Do you want to select this book ? Y/N");
+                if (sc.next().equalsIgnoreCase("y")) selectBook(bookList.get(0));
+            } else
                 System.out.println(booksList.size() + " books are found in library which are matching the search " + searchTerm);
             System.out.println("--------------------------------------");
             for (Book bookItem : booksList) {
-                String title = bookItem.getTitle();
-                String author = bookItem.getAuthor();
-                String ISBN = bookItem.getISBN();
-                String genre = bookItem.getGenre();
-                String publicationDate = bookItem.getPublicationDate();
-                long numberOfCopies = bookItem.getNumberOfCopies();
-                System.out.println("Title: " + title);
-                System.out.println("Author: " + author);
-                System.out.println("ISBN: " + ISBN);
-                System.out.println("Genre: " + genre);
-                System.out.println("Publication Date: " + publicationDate);
-                System.out.println("Number of Copies: " + numberOfCopies);
-                System.out.println("--------------------------------------");
+                System.out.println(bookItem);
             }
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Want to filter books further ? Y/N");
+            if (booksList.size() > 1) {
+                System.out.println("Want to filter books further ? Y/N");
+            } else if (booksList.size() == 1) {
+                System.out.println("Do you want to select this book ? Y/N");
+                if (sc.next().equalsIgnoreCase("y")) selectBook(bookList.get(0));
+            }
             if (sc.next().equalsIgnoreCase("y")) {
                 String advanceSearchTerm = advanceBookSearch();
                 searchBookInMatchedResults(advanceSearchTerm);
-            }else System.out.println("Thank you for visiting our library");
+            } else System.out.println("Thank you for visiting our library");
         }
     }
 
@@ -86,6 +85,25 @@ public class SearchBook {
             else if (publicationDate.equals(advanceSearchTerm))
                 filterBooks.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
         }
-        printSearchedBook(advanceSearchTerm,filterBooks);
+        printSearchedBook(advanceSearchTerm, filterBooks);
     }
+
+    public void selectBook(Book selectedBook) {
+        long numberOfCopies = selectedBook.getNumberOfCopies();
+        if (numberOfCopies == 1) {
+            System.out.println("Only 1 book is available");
+            System.out.println(selectedBook);
+            bookList.removeIf(book -> book.getISBN().equals(selectedBook.getISBN()));
+        } else if (numberOfCopies == 0) {
+            System.out.println("Books are not available");
+            bookList.removeIf(book -> book.getISBN().equals(selectedBook.getISBN()));
+        } else if (numberOfCopies < 1) {
+            for (Book bookItem : bookList) {
+                if (bookItem.getISBN().equals(selectedBook.getISBN())) {
+                    bookItem.setNumberOfCopies(numberOfCopies - 1);
+                }
+            }
+        }
+    }
+
 }
