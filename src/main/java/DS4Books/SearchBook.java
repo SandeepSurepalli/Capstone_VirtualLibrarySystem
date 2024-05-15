@@ -44,34 +44,32 @@ public class SearchBook {
         if (booksList.isEmpty()) System.out.println("No books found");
         else {
             if (booksList.size() == 1) {
-                System.out.println("Only 1 book found in library." + booksList.get(0) + "\n" + "Do yo want to select it ? Y/N");
+                System.out.println("Only 1 book found in library." + "\n" + booksList.get(0) + "\n" + "Do yo want to select it ? Y/N");
                 if (sc.next().equalsIgnoreCase("y")) selectBook(booksList.get(0));
 
-            } else
-                System.out.println(booksList.size() + " books are found in library which are matching the search " + searchTerm);
-            System.out.println("--------------------------------------");
-            for (Book bookItem : booksList) {
-                System.out.println(bookItem);
-            }
-            if (booksList.size() > 1) {
-                System.out.println("Want to filter books further ? Y/N");
-            }
-            if (sc.next().equalsIgnoreCase("y")) {
-                String advanceSearchTerm = advanceBookSearch();
-                searchBookInMatchedResults(advanceSearchTerm);
             } else {
-                System.out.println("Do you want to select any book from searched books ? Y/N");
+                System.out.println(booksList.size() + " books are found in library which are matching the search " + searchTerm);
+                System.out.println("--------------------------------------");
+                for (Book bookItem : booksList) {
+                    System.out.println(bookItem);
+                }
+                System.out.println("Want to filter books further ? Y/N");
                 if (sc.next().equalsIgnoreCase("y")) {
-                    String bookISBN = bookISBNSearch();
-                    Book searchedBook;
-                    if (filterBooks.isEmpty())
-                        searchedBook = matchedBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
-                    else
-                        searchedBook = filterBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
-                    selectBook(searchedBook);
+                    String advanceSearchTerm = advanceBookSearch();
+                    searchBookInMatchedResults(advanceSearchTerm);
+                } else {
+                    System.out.println("Do you want to select any book from searched books ? Y/N");
+                    if (sc.next().equalsIgnoreCase("y")) {
+                        String bookISBN = bookISBNSearch();
+                        Book searchedBook;
+                        if (filterBooks.isEmpty())
+                            searchedBook = matchedBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
+                        else
+                            searchedBook = filterBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
+                        selectBook(searchedBook);
+                    }
                 }
             }
-
         }
     }
 
