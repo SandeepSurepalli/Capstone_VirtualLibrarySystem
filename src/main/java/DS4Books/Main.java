@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Starting from Here ");
-        String filePath = "src//main//resources//Books.csv";
+        String filePath = "src//main//resources//Books.xml";
         BookManager BM = new BookManager(filePath);
         List<Book> bookList = BM.getBookList();
         SearchBook sb = new SearchBook(bookList);

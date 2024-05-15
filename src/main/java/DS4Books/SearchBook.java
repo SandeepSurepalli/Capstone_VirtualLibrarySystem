@@ -54,14 +54,16 @@ public class SearchBook {
             }
             if (booksList.size() > 1) {
                 System.out.println("Want to filter books further ? Y/N");
-            } else if (booksList.size() == 1) {
-                System.out.println("Do you want to select this book ? Y/N");
-                if (sc.next().equalsIgnoreCase("y")) selectBook(bookList.get(0));
             }
             if (sc.next().equalsIgnoreCase("y")) {
                 String advanceSearchTerm = advanceBookSearch();
                 searchBookInMatchedResults(advanceSearchTerm);
-            } else System.out.println("Thank you for visiting our library");
+            }
+            System.out.println("Do you want to select any of this books ? Y/N");
+            if (sc.next().equalsIgnoreCase("y")) {
+                String bookISBNSearchTerm = bookISBNSearch();
+                searchBookInMatchedResults(bookISBNSearchTerm);
+            }
         }
     }
 
@@ -95,15 +97,22 @@ public class SearchBook {
             System.out.println(selectedBook);
             bookList.removeIf(book -> book.getISBN().equals(selectedBook.getISBN()));
         } else if (numberOfCopies == 0) {
-            System.out.println("Books are not available");
+            System.out.println("Out of Stock");
             bookList.removeIf(book -> book.getISBN().equals(selectedBook.getISBN()));
         } else if (numberOfCopies < 1) {
+            System.out.println("Available Copies: "+numberOfCopies);
             for (Book bookItem : bookList) {
                 if (bookItem.getISBN().equals(selectedBook.getISBN())) {
                     bookItem.setNumberOfCopies(numberOfCopies - 1);
                 }
             }
         }
+    }
+    public String bookISBNSearch() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter book ISBN number to select book" + "\n");
+        String searchTerm = sc.nextLine();
+        return searchTerm;
     }
 
 }
