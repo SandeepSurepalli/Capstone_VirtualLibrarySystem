@@ -44,7 +44,8 @@ public class SearchBook {
         if (booksList.isEmpty()) System.out.println("No books found");
         else {
             if (booksList.size() == 1) {
-                System.out.println("Only 1 book found in library.");
+                System.out.println("Only 1 book found in library." + booksList.get(0) + "\n" + "Do yo want to select it ? Y/N");
+                if (sc.next().equalsIgnoreCase("y")) selectBook(booksList.get(0));
 
             } else
                 System.out.println(booksList.size() + " books are found in library which are matching the search " + searchTerm);
@@ -58,6 +59,13 @@ public class SearchBook {
             if (sc.next().equalsIgnoreCase("y")) {
                 String advanceSearchTerm = advanceBookSearch();
                 searchBookInMatchedResults(advanceSearchTerm);
+            }else{
+                System.out.println("Do you want to select any book from searched books ? Y/N");
+                if (sc.next().equalsIgnoreCase("y")) {
+                    String bookISBN = bookISBNSearch();
+                    Book searchedBook = matchedBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
+                    selectBook(searchedBook);
+                }
             }
 
         }
@@ -86,8 +94,35 @@ public class SearchBook {
         printSearchedBook(advanceSearchTerm, filterBooks);
     }
 
-    public List<Book> getSearchedBook() {
+    /*public List<Book> getSearchedBook() {
         if (filterBooks.isEmpty()) return matchedBooks.isEmpty() ? bookList : matchedBooks;
         else return null;
+    }*/
+
+    public void selectBook(Book selectedBook) {
+        long numberOfCopies = selectedBook.getNumberOfCopies();
+        if (numberOfCopies == 1) {
+            System.out.println("Only 1 book is available");
+            System.out.println(selectedBook);
+            bookList.removeIf(book -> book.getISBN().equals(selectedBook.getISBN()));
+        } else if (numberOfCopies == 0) {
+            System.out.println("Out of Stock");
+            bookList.removeIf(book -> book.getISBN().equals(selectedBook.getISBN()));
+        } else if (numberOfCopies > 1) {
+            System.out.println("Available Copies: " + numberOfCopies);
+            for (Book bookItem : bookList) {
+                if (bookItem.getISBN().equals(selectedBook.getISBN())) {
+                    bookItem.setNumberOfCopies(numberOfCopies - 1);
+                }
+            }
+            System.out.println(selectedBook);
+        }
+    }
+
+    public static String bookISBNSearch() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter book ISBN number to select book" + "\n");
+        String searchTerm = sc.nextLine();
+        return searchTerm;
     }
 }
