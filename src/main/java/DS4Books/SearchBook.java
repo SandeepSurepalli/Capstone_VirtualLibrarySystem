@@ -59,11 +59,15 @@ public class SearchBook {
             if (sc.next().equalsIgnoreCase("y")) {
                 String advanceSearchTerm = advanceBookSearch();
                 searchBookInMatchedResults(advanceSearchTerm);
-            }else{
+            } else {
                 System.out.println("Do you want to select any book from searched books ? Y/N");
                 if (sc.next().equalsIgnoreCase("y")) {
                     String bookISBN = bookISBNSearch();
-                    Book searchedBook = matchedBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
+                    Book searchedBook;
+                    if (filterBooks.isEmpty())
+                        searchedBook = matchedBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
+                    else
+                        searchedBook = filterBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
                     selectBook(searchedBook);
                 }
             }
