@@ -91,8 +91,8 @@ public class SearchBook {
         System.out.println("Selected book details: " + selectedBook.getTitle());
         System.out.println("Do you want to proceed ? : Y/N");
         Scanner sc = new Scanner(System.in);
-        String answer = sc.next();
-        if (answer.equalsIgnoreCase("y")) {
+        String proceed = sc.next();
+        if (proceed.equalsIgnoreCase("y")) {
             long availableCopies = selectedBook.getNumberOfCopies();
             if (availableCopies > 0) {
                 selectedBook.setNumberOfCopies(availableCopies - 1);
