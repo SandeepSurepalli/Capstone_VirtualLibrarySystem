@@ -47,14 +47,21 @@ public class SearchBook {
             for (Book bookItem : booksList) {
                 System.out.println(bookItem);
             }
-            String bookISBN = bookISBNSearch();
-            Book searchedBook;
-            searchedBook = matchedBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
-            selectBook(searchedBook);
         }
     }
 
-    public void selectBook(Book selectedBook) {
+    public Book searchBookByISBN() {
+        String bookISBN = bookISBNSearch();
+        Book searchBook;
+        if (matchedBooks.isEmpty())
+            searchBook = bookList.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
+        else
+            searchBook = matchedBooks.stream().filter(book -> book.getISBN().equals(bookISBN)).findFirst().orElse(null);
+        return searchBook;
+    }
+
+    public void selectBook() {
+        Book selectedBook = searchBookByISBN();
         if (selectedBook == null) {
             System.out.println("No book found with the given ISBN.");
             return;
@@ -70,8 +77,23 @@ public class SearchBook {
 
     public static String bookISBNSearch() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the book number for more details:" + "\n");
+        System.out.println("Enter the book number for more details: ");
         String searchTerm = sc.nextLine();
         return searchTerm;
+    }
+
+    public void borrowBook() {
+        Book selectedBook = searchBookByISBN();
+        if (selectedBook == null) {
+            System.out.println("No book found with the given ISBN.");
+            return;
+        }
+        System.out.println("Selected book details: "+selectedBook.getTitle());
+        System.out.println("Do you want to proceed ? : Y/N");
+        Scanner sc = new Scanner(System.in);
+        if(sc.next().equalsIgnoreCase("y")) {
+            System.out.println("Available Copies: " + selectedBook.getNumberOfCopies());
+            selectedBook.setNumberOfCopies(selectedBook.getNumberOfCopies()-1);
+        }
     }
 }

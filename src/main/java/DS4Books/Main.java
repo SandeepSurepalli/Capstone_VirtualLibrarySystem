@@ -11,5 +11,7 @@ public class Main {
         List<Book> bookList = BM.getBookList();
         SearchBook sb = new SearchBook(bookList);
         sb.searchBookInLibrary();
+        sb.selectBook();
+        sb.borrowBook();
     }
 }
