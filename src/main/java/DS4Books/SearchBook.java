@@ -122,19 +122,22 @@ public class SearchBook {
     }*/
 
     public void selectBook(Book selectedBook) {
-        if (selectedBook != null) {
-            System.out.println("Selected book details:");
-            System.out.println(selectedBook);
-            String availability = selectedBook.getNumberOfCopies() > 0 ? "Available Copies: " + selectedBook.getNumberOfCopies() : "Out of Stock";
-            System.out.println(availability);
-        } else {
+        if (selectedBook == null) {
             System.out.println("No book found with the given ISBN.");
+            return;
+        }
+        System.out.println("Selected book details:");
+        System.out.println(selectedBook);
+        if (selectedBook.getNumberOfCopies() > 0) {
+            System.out.println("Available Copies: " + selectedBook.getNumberOfCopies());
+        } else {
+            System.out.println("Out of Stock");
         }
     }
 
     public static String bookISBNSearch() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter book ISBN number to select book" + "\n");
+        System.out.println("Enter the book number for more details:" + "\n");
         String searchTerm = sc.nextLine();
         return searchTerm;
     }
