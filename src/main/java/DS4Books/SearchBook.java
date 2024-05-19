@@ -88,12 +88,17 @@ public class SearchBook {
             System.out.println("No book found with the given ISBN.");
             return;
         }
-        System.out.println("Selected book details: "+selectedBook.getTitle());
+        System.out.println("Selected book details: " + selectedBook.getTitle());
         System.out.println("Do you want to proceed ? : Y/N");
         Scanner sc = new Scanner(System.in);
-        if(sc.next().equalsIgnoreCase("y")) {
-            System.out.println("Available Copies: " + selectedBook.getNumberOfCopies());
-            selectedBook.setNumberOfCopies(selectedBook.getNumberOfCopies()-1);
-        }
+        String answer = sc.next();
+        if (answer.equalsIgnoreCase("y")) {
+            long availableCopies = selectedBook.getNumberOfCopies();
+            if (availableCopies > 0) {
+                selectedBook.setNumberOfCopies(availableCopies - 1);
+                System.out.println("The book has been borrowed successfully. Remaining Copies: "
+                        + selectedBook.getNumberOfCopies());
+            } else System.out.println("The book is out of stock.");
+        }else System.out.println("Borrowing cancelled.");
     }
 }
