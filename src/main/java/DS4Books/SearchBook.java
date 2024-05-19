@@ -101,7 +101,7 @@ public class SearchBook {
         else return null;
     }*/
 
-    public void selectBook(Book selectedBook) {
+   /* public void selectBook(Book selectedBook) {
         long numberOfCopies = selectedBook.getNumberOfCopies();
         if (numberOfCopies == 1) {
             System.out.println("Only 1 book is available");
@@ -118,6 +118,17 @@ public class SearchBook {
                 }
             }
             System.out.println(selectedBook);
+        }
+    }*/
+
+    public void selectBook(Book selectedBook) {
+        if (selectedBook != null) {
+            System.out.println("Selected book details:");
+            System.out.println(selectedBook);
+            String availability = selectedBook.getNumberOfCopies() > 0 ? "Available Copies: " + selectedBook.getNumberOfCopies() : "Out of Stock";
+            System.out.println(availability);
+        } else {
+            System.out.println("No book found with the given ISBN.");
         }
     }
 
