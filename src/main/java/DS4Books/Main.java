@@ -11,8 +11,5 @@ public class Main {
         List<Book> bookList = BM.getBookList();
         SearchBook sb = new SearchBook(bookList);
         sb.searchBookInLibrary();
-        /*List<Book> searchedBooksList = sb.getSearchedBook().isEmpty() ? bookList : sb.getSearchedBook();
-        SelectBook selBook = new SelectBook(searchedBooksList);
-        selBook.searchBook();*/
     }
 }
