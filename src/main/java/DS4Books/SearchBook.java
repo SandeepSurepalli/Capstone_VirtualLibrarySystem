@@ -43,7 +43,7 @@ public class SearchBook {
         Scanner sc = new Scanner(System.in);
         if (booksList.isEmpty()) System.out.println("No books found");
         else {
-            if (booksList.size() == 1) {
+            if (/*booksList.size() == 1*/false) {
                 System.out.println("Only 1 book found in library." + "\n" + booksList.get(0) + "\n" + "Do yo want to select it ? Y/N");
                 if (sc.next().equalsIgnoreCase("y")) selectBook(booksList.get(0));
 
@@ -53,13 +53,13 @@ public class SearchBook {
                 for (Book bookItem : booksList) {
                     System.out.println(bookItem);
                 }
-                System.out.println("Want to filter books further ? Y/N");
-                if (sc.next().equalsIgnoreCase("y")) {
+//                System.out.println("Want to filter books further ? Y/N");
+                if (/*sc.next().equalsIgnoreCase("y")*/false) {
                     String advanceSearchTerm = advanceBookSearch();
                     searchBookInMatchedResults(advanceSearchTerm);
                 } else {
-                    System.out.println("Do you want to select any book from searched books ? Y/N");
-                    if (sc.next().equalsIgnoreCase("y")) {
+//                    System.out.println("Do you want to select any book from searched books ? Y/N");
+                    if (/*sc.next().equalsIgnoreCase("y")*/true) {
                         String bookISBN = bookISBNSearch();
                         Book searchedBook;
                         if (filterBooks.isEmpty())
