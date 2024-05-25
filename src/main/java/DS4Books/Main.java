@@ -15,6 +15,7 @@ public class Main {
         bookManager = new BookManager(filePath);
         String userId = "user123";
         BookManager.notifyOverdueBooks(userId);
+        bookManager.alertOnOverdueBooks(userId);
         displayMainMenu();
     }
 

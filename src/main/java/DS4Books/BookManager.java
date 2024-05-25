@@ -215,4 +215,10 @@ public class BookManager {
         }
     }
 
+    public static void alertOnOverdueBooks(String userId) {
+        if (checkOverdueBooks(userId)) {
+            notifyOverdueBooks(userId);
+        }
+    }
+
 }
