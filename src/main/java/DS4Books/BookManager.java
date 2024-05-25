@@ -170,7 +170,7 @@ public class BookManager {
     public static boolean checkOverdueBooks(String userId) {
         boolean hasOverdueBooks = false;
         for (BorrowTransaction transaction : borrowTransactions) {
-            if (transaction.userID.equals(userId) && transaction.returnDate == null) {
+            if (transaction.getUserID().equals(userId) && transaction.getReturnDate() == null) {
                 if (transaction.dueDate.before(new Date())) { // Check if due date has passed and not returned
                     hasOverdueBooks = true;
                     break; // Exit loop after finding one overdue book

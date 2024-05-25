@@ -26,6 +26,7 @@ public class SearchBook {
 
     public void searchBookInLibrary() {
         String searchTerm = getBookDetailsFromUser();
+
         for (Book bookItem : bookList) {
             String title = bookItem.getTitle();
             String author = bookItem.getAuthor();
@@ -40,10 +41,6 @@ public class SearchBook {
             else if (ISBN.equalsIgnoreCase(searchTerm))
                 matchedBooks.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
         }
-        System.out.print("Enter a book title or ISBN: ");
-        String searchCriteria = scanner.nextLine();
-
-        List<Book> matchedBooks = searchBooks(searchCriteria);
         if (matchedBooks.isEmpty()) {
             System.out.println("No books found matching your criteria.");
             return;
