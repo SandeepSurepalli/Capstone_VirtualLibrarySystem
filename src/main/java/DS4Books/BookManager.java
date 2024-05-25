@@ -26,7 +26,10 @@ public class BookManager {
     private static List<BorrowTransaction> borrowTransactions = new ArrayList<>();
     private static Set<String> adminIds = new HashSet<>();
 
-
+    static {
+        // Read admin IDs from a file, database, or hardcode them here (for simplicity)
+        adminIds = new HashSet<>(Arrays.asList("admin1", "admin2"));
+    }
 
     public BookManager(String filePath) {
         fileType = com.google.common.io.Files.getFileExtension(filePath);

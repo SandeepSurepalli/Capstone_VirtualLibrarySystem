@@ -14,10 +14,10 @@ public class SearchBook {
     }
 
     public String getBookDetailsFromUser() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter book title, ISBN number or author name to search in virtual library" + "\n");
-        String searchTerm = sc.nextLine();
-        return searchTerm;
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Enter book title, ISBN number or author name to search in virtual library" + "\n");
+            return sc.nextLine();
+        }
     }
 
     public void searchBookInLibrary() {
