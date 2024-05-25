@@ -114,24 +114,22 @@ public class SearchBook {
     }
 
     public void offerOptions() {
-        System.out.println("Please choose an option:");
-        System.out.println("1. Return to the main menu");
-        System.out.println("2. Perform another search");
-        try (Scanner sc = new Scanner(System.in)) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("Please choose an option:");
+            System.out.println("1. Return to the main menu");
+            System.out.println("2. Perform another search");
+            System.out.print("Enter choice (1 or 2): ");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
-                    // Return to the main menu or exit the application
                     System.out.println("Returning to the main menu...");
-                    break;
+                    return;
                 case 2:
-                    // Call the search method again
                     searchBookInLibrary();
-                    break;
+                    return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
-                    offerOptions();
-                    break;
+                    System.out.println("Invalid choice. Please enter 1 or 2.");
             }
         }
     }
