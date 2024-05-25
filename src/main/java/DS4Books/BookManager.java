@@ -208,9 +208,9 @@ public class BookManager {
                 .collect(Collectors.toList());
 
         if (!overdueBooks.isEmpty()) {
-            System.out.println("** Overdue Books Notification **");
+            System.out.println("** Notice: You have overdue books. **");
             for (BorrowTransaction transaction : overdueBooks) {
-                System.out.println("Overdue: Book ISBN: " + transaction.getBookISBN() + " was due on " + transaction.getDueDate());
+                System.out.println("Book ISBN: " + transaction.getBookISBN() + " is overdue.");
             }
         }
     }

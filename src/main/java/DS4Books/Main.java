@@ -10,11 +10,9 @@ public class Main {
     private static SearchBook searchBook;
 
     public static void main(String[] args) {
-        System.out.println("Starting from Here ");
+        System.out.println("Welcome to the Virtual Library!");
         String filePath = "src//main//resources//Books.csv";
         bookManager = new BookManager(filePath);
-        List<Book> bookList = bookManager.getBookList();
-        searchBook = new SearchBook(bookList);
         String userId = "user123";
         BookManager.notifyOverdueBooks(userId);
         displayMainMenu();
