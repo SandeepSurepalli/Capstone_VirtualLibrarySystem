@@ -14,7 +14,6 @@ public class Main {
         String filePath = "src//main//resources//Books.csv";
         bookManager = new BookManager(filePath);
         String userId = "user123";
-        BookManager.notifyOverdueBooks(userId);
         bookManager.alertOnOverdueBooks(userId);
         displayMainMenu();
     }
