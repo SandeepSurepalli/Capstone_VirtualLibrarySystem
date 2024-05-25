@@ -135,6 +135,52 @@ public class SearchBook {
         }
     }
 
+    public void returnBook() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the ISBN of the book you want to return: ");
+        String bookISBN = scanner.nextLine();
 
+        System.out.print("Enter your user ID: ");
+        String userId = scanner.nextLine();
+
+        Book bookToReturn = searchBookByISBN(bookISBN);
+        if (bookToReturn == null) {
+            System.out.println("No book found with the given ISBN.");
+            return;
+        }
+
+        BorrowTransaction transaction = findBorrowTransaction(userId, bookISBN);
+        if (transaction == null) {
+            System.out.println("You haven't borrowed this book.");
+            return;
+        }
+
+        System.out.println("Book Title: " + bookToReturn.getTitle());
+        System.out.println("Borrowed By: " + userId);
+        System.out.print("Confirm return? (Y/N): ");
+        String confirmation = scanner.nextLine().toUpperCase();
+
+        if (confirmation.equals("Y")) {
+            long currentCopies = bookToReturn.getNumberOfCopies();
+            bookToReturn.setNumberOfCopies(currentCopies + 1);
+            bookToReturn.updateStatus();
+            System.out.println("Book returned successfully.");
+            BookManager.borrowTransactions.remove(transaction);
+        } else {
+            System.out.println("Return canceled.");
+        }
+    }
+    private BorrowTransaction findBorrowTransaction(String userId, String bookISBN) {
+        return BookManager.borrowTransactions.stream()
+                .filter(transaction -> transaction.getUserID().equals(userId) && transaction.getBookISBN().equals(bookISBN))
+                .findFirst()
+                .orElse(null);
+    }
+    private Book searchBookByISBN(String bookISBN) {
+        return bookList.stream()
+                .filter(book -> book.getISBN().equals(bookISBN))
+                .findFirst()
+                .orElse(null);
+    }
 
 }

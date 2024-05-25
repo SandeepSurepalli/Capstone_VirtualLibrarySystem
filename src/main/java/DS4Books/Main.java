@@ -23,8 +23,9 @@ public class Main {
             System.out.println("\nVirtual Library Main Menu:");
             System.out.println("1. Search for a book");
             System.out.println("2. Borrow a book");
-            System.out.println("3. View borrowing transactions (Admin)");
-            System.out.println("4. Exit");
+            System.out.println("3. Return a book");
+            System.out.println("4. View borrowing transactions (Admin)");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -37,11 +38,14 @@ public class Main {
                     searchBook.borrowBook();
                     break;
                 case 3:
+                    searchBook.returnBook();
+                    break;
+                case 4:
                     System.out.print("Enter admin ID: ");
                     String adminId = scanner.nextLine();
                     bookManager.viewBorrowTransactions(adminId);
                     break;
-                case 4:
+                case 5:
                     System.out.println("Exiting the application...");
                     System.exit(0);
                     break;

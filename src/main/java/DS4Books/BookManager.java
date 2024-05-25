@@ -23,7 +23,7 @@ public class BookManager {
     public static int noOfDuplicateBooks = 0;
     public static String fileType = "";
     public static int[] Books = new int[3];
-    private static List<BorrowTransaction> borrowTransactions = new ArrayList<>();
+    static List<BorrowTransaction> borrowTransactions = new ArrayList<>();
     private static Set<String> adminIds = new HashSet<>();
 
     static {
