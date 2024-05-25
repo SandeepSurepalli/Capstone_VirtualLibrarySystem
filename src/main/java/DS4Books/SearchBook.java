@@ -153,26 +153,6 @@ public class SearchBook {
         if (transaction == null) {
             System.out.println("You haven't borrowed this book.");
             return;
-        }else{
-            System.out.println("Book Title: " + bookToReturn.getTitle());
-            System.out.println("Borrowed By: " + userId);
-            System.out.print("Confirm return? (Y/N): ");
-            String confirmation = scanner.nextLine().toUpperCase();
-
-            if (confirmation.equals("Y")) {
-                long currentCopies = bookToReturn.getNumberOfCopies();
-                bookToReturn.setNumberOfCopies(currentCopies + 1);
-                bookToReturn.updateStatus();
-                System.out.println("Book returned successfully.");
-
-                // Update return date in the transaction record
-                transaction.setReturnDate(new Date());
-                BookManager.borrowTransactions.set(BookManager.borrowTransactions.indexOf(transaction), transaction);
-
-                System.out.println("Return logged: User ID: " + userId + ", Book ISBN: " + bookISBN + ", Return Date: " + transaction.getReturnDate());
-            } else {
-                System.out.println("Return canceled.");
-            }
         }
 
         System.out.println("Book Title: " + bookToReturn.getTitle());
@@ -185,7 +165,12 @@ public class SearchBook {
             bookToReturn.setNumberOfCopies(currentCopies + 1);
             bookToReturn.updateStatus();
             System.out.println("Book returned successfully.");
-            BookManager.borrowTransactions.remove(transaction);
+
+            // Update return date in the transaction record
+            transaction.setReturnDate(new Date());
+            BookManager.borrowTransactions.set(BookManager.borrowTransactions.indexOf(transaction), transaction);
+
+            System.out.println("Return logged: User ID: " + userId + ", Book ISBN: " + bookISBN + ", Return Date: " + transaction.getReturnDate());
         } else {
             System.out.println("Return canceled.");
         }
