@@ -7,6 +7,7 @@ public class Book {
     private String genre;
     private String publicationDate;
     private long numberOfCopies;
+    private String status;
 
     public Book(String bookTitle, String bookAuthor, String bookISBN, String bookGenre, String bookPublicationDate, long bookCopies) {
         this.title = bookTitle;
@@ -15,6 +16,7 @@ public class Book {
         this.genre = bookGenre;
         this.publicationDate = bookPublicationDate;
         this.numberOfCopies = bookCopies;
+        updateStatus();
     }
 
     public String getTitle() {
@@ -64,4 +66,17 @@ public class Book {
     public String toString() {
         return "Title: " + getTitle() + "\n" + "Author: " + getAuthor() + "\n" + "ISBN: " + getISBN() + "\n" + "Genre: " + getGenre() + "\n" + "Publication Date: " + getPublicationDate() + "\n" + "Number of Copies: " + getNumberOfCopies() + "\n" + "--------------------------------------";
     }
+
+    public void updateStatus() {
+        if (numberOfCopies > 0) {
+            status = "In Stock";
+        } else {
+            status = "Out of Stock";
+        }
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
 }

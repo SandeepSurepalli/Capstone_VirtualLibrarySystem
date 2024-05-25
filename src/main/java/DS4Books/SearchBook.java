@@ -100,8 +100,9 @@ public class SearchBook {
                     String userId = sc.next();
 
                     selectedBook.setNumberOfCopies(availableCopies - 1);
-                    System.out.println("The book has been borrowed successfully. Remaining Copies: "
-                            + selectedBook.getNumberOfCopies());
+                    selectedBook.updateStatus(); // Update the book's status
+                    System.out.println("The book has been borrowed successfully. Remaining Copies: " + selectedBook.getNumberOfCopies());
+                    System.out.println("Book Status: " + selectedBook.getStatus());
 
                     // Log the transaction
                     BorrowTransaction transaction = new BorrowTransaction(userId, selectedBook.getISBN());
