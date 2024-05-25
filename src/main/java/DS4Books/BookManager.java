@@ -202,5 +202,17 @@ public class BookManager {
         }
     }
 
+    public static void flagOverdueBooks(String userId) {
+        List<BorrowTransaction> overdueBooks = borrowTransactions.stream()
+                .filter(transaction -> transaction.getUserID().equals(userId) && transaction.getReturnDate() == null && transaction.getDueDate().before(new Date()))
+                .collect(Collectors.toList());
+
+        if (!overdueBooks.isEmpty()) {
+            System.out.println("** Overdue Books Notification **");
+            for (BorrowTransaction transaction : overdueBooks) {
+                System.out.println("Overdue: Book ISBN: " + transaction.getBookISBN() + " was due on " + transaction.getDueDate());
+            }
+        }
+    }
 
 }
