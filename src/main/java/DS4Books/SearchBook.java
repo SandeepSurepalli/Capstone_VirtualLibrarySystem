@@ -72,7 +72,7 @@ public class SearchBook {
         if (selectedBook.getNumberOfCopies() > 0) {
             System.out.println("Available Copies: " + selectedBook.getNumberOfCopies());
         } else {
-            System.out.println("ALERT: The requested book is currently out of stock.");
+            System.err.println("ALERT: The requested book, '" + selectedBook.getTitle() + "', is out of stock.");
         }
     }
 
@@ -115,7 +115,7 @@ public class SearchBook {
 
     public void offerOptions() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Choose your next action:");
+        System.out.println("The book is out of stock. Would you like to:");
         System.out.println("1. Return to the main menu");
         System.out.println("2. Search for another book");
         while (true) {
@@ -134,5 +134,7 @@ public class SearchBook {
             }
         }
     }
+
+
 
 }
