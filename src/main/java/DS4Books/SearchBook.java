@@ -90,14 +90,12 @@ public class SearchBook {
             return;
         }
         System.out.println("Selected book details: " + selectedBook.getTitle());
-        System.out.println("Do you want to proceed ? : Y/N");
-        try (Scanner sc = new Scanner(System.in)) {
-            String proceed = sc.next();
-            if (proceed.equalsIgnoreCase("y")) {
-                long availableCopies = selectedBook.getNumberOfCopies();
-                if (availableCopies > 0) {
-                    System.out.println("Enter your user ID: ");
-                    String userId = sc.next();
+        if (selectedBook.getNumberOfCopies() > 0) {
+            System.out.println("Do you want to proceed ? : Y/N");
+            try (Scanner sc = new Scanner(System.in)) {
+                String proceed = sc.next();
+                if (proceed.equalsIgnoreCase("y")) {
+                    long availableCopies = selectedBook.getNumberOfCopies();
 
                     selectedBook.setNumberOfCopies(availableCopies - 1);
                     selectedBook.updateStatus(); // Update the book's status
@@ -105,21 +103,18 @@ public class SearchBook {
                     System.out.println("Book Status: " + selectedBook.getStatus());
 
                     // Log the transaction
-                    BorrowTransaction transaction = new BorrowTransaction(userId, selectedBook.getISBN());
+                    BorrowTransaction transaction = new BorrowTransaction(null, selectedBook.getISBN());
                     BookManager.addBorrowTransaction(transaction);
-                } else {
-                    System.out.println("Sorry, the book '" + selectedBook.getTitle() + "' is currently out of stock.");
-                    offerOptions();
                 }
-            } else {
-                System.out.println("Borrowing cancelled.");
-                offerOptions();
             }
+        } else {
+            System.out.println("Alert: The book '" + selectedBook.getTitle() + "' is currently out of stock.");
+            offerOptions();
         }
     }
 
     public void offerOptions() {
-        System.out.println("What would you like to do next?");
+        System.out.println("Please choose an option:");
         System.out.println("1. Return to the main menu");
         System.out.println("2. Perform another search");
         try (Scanner sc = new Scanner(System.in)) {
