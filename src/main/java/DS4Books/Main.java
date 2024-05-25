@@ -18,7 +18,7 @@ public class Main {
         displayMainMenu();
     }
 
-    private static void displayMainMenu() {
+    static void displayMainMenu() {
         while (true) {
             System.out.println("\nVirtual Library Main Menu:");
             System.out.println("1. Search for a book");
