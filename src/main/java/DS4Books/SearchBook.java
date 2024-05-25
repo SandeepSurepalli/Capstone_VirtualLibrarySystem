@@ -171,7 +171,6 @@ public class SearchBook {
         }
     }
 
-
     private BorrowTransaction findBorrowTransaction(String userId, String bookISBN) {
         return BookManager.borrowTransactions.stream()
                 .filter(transaction -> transaction.getUserID().equals(userId) && transaction.getBookISBN().equals(bookISBN))
