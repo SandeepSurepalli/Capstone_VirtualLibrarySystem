@@ -1,6 +1,7 @@
 package DS4Books;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -13,5 +14,11 @@ public class Main {
         sb.searchBookInLibrary();
         sb.selectBook();
         sb.borrowBook();
+        System.out.println("Do you want to view borrowing transactions? : Y/N");
+        Scanner sc = new Scanner(System.in);
+        String viewTransactions = sc.next();
+        if (viewTransactions.equalsIgnoreCase("y")) {
+            BookManager.viewBorrowTransactions();
+        }
     }
 }

@@ -2,6 +2,7 @@ package DS4Books;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -24,6 +25,8 @@ public class BookManager {
     public static int noOfDuplicateBooks = 0;
     public static String fileType = "";
     public static int[] Books = new int[3];
+    private static List<BorrowTransaction> borrowTransactions = new ArrayList<>();
+
 
     public BookManager(String filePath) {
         fileType = com.google.common.io.Files.getFileExtension(filePath);
@@ -129,6 +132,20 @@ public class BookManager {
         Books[2] = noOfDuplicateBooks;
         System.out.println(Books[1] + " are added to library");
         System.out.println(Books[2] + " are not added due to duplicate");
+    }
+
+    public static void addBorrowTransaction(String userID, String bookISBN, Date borrowingDate) {
+        borrowTransactions.add(new BorrowTransaction(userID, bookISBN, borrowingDate));
+    }
+
+    public static void viewBorrowTransactions() {
+        if (borrowTransactions.isEmpty()) {
+            System.out.println("No borrowing transactions found.");
+        } else {
+            for (BorrowTransaction transaction : borrowTransactions) {
+                System.out.println(transaction);
+            }
+        }
     }
 
     public List<Book> getBookList() {

@@ -1,6 +1,7 @@
 package DS4Books;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -93,13 +94,22 @@ public class SearchBook {
         try (Scanner sc = new Scanner(System.in)) {
             String proceed = sc.next();
             if (proceed.equalsIgnoreCase("y")) {
+                System.out.print("Enter your user ID: ");
+                String userID = sc.next();
                 long availableCopies = selectedBook.getNumberOfCopies();
                 if (availableCopies > 0) {
                     selectedBook.setNumberOfCopies(availableCopies - 1);
+                    Date borrowingDate = new Date();
+                    BookManager.addBorrowTransaction(userID, selectedBook.getISBN(), borrowingDate);
                     System.out.println("The book has been borrowed successfully. Remaining Copies: "
                             + selectedBook.getNumberOfCopies());
-                } else System.out.println("The book is out of stock.");
-            } else System.out.println("Borrowing cancelled.");
+                } else {
+                    System.out.println("The book is out of stock.");
+                }
+            } else {
+                System.out.println("Borrowing cancelled.");
+            }
         }
     }
+
 }
