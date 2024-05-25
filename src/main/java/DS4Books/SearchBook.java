@@ -166,13 +166,14 @@ public class SearchBook {
 
         if (confirmation.equals("Y")) {
             long currentCopies = bookToReturn.getNumberOfCopies();
-            bookToReturn.setNumberOfCopies(currentCopies + 1);
-            bookToReturn.updateStatus();
+            bookToReturn.setNumberOfCopies(currentCopies + 1); // Increase available copies
+            bookToReturn.updateStatus(); // Update book status based on new copies
+
             System.out.println("Book returned successfully.");
 
-            transaction.setReturnDate(new Date());
+           transaction.setReturnDate(new Date());
 
-            int transactionIndex = BookManager.borrowTransactions.indexOf(transaction);
+           int transactionIndex = BookManager.borrowTransactions.indexOf(transaction);
             if (transactionIndex != -1) { // Check if transaction found
                 BookManager.borrowTransactions.set(transactionIndex, transaction);
                 System.out.println("Return logged: User ID: " + userId + ", Book ISBN: " + bookISBN + ", Return Date: " + transaction.getReturnDate());
