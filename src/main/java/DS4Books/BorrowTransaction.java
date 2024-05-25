@@ -14,6 +14,7 @@ public class BorrowTransaction {
         this.bookISBN = bookISBN;
         this.borrowingDate = new Date();
         this.returnDate = null;
+        this.dueDate = new Date(this.borrowingDate.getTime() + (14 * 24 * 60 * 60 * 1000));
     }
 
     public BorrowTransaction(String userID, String bookISBN, Date returnDate) {

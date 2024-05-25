@@ -19,6 +19,8 @@ public class Main {
     }
 
     static void displayMainMenu() {
+        String userId = "user123";
+
         while (true) {
             System.out.println("\nVirtual Library Main Menu:");
             System.out.println("1. Search for a book");
@@ -32,6 +34,9 @@ public class Main {
 
             switch (choice) {
                 case 1:
+                    if (BookManager.checkOverdueBooks(userId)) {
+                        System.out.println("** You have overdue books. Please return them as soon as possible. **");
+                    }
                     searchBook.searchBookInLibrary();
                     break;
                 case 2:
