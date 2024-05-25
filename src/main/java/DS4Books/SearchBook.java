@@ -108,7 +108,7 @@ public class SearchBook {
                 }
             }
         } else {
-            System.out.println("Alert: The book '" + selectedBook.getTitle() + "' is currently out of stock.");
+            System.out.println("Alert: The requested book, '" + selectedBook.getTitle() + "', is out of stock.");
             offerOptions();
         }
     }

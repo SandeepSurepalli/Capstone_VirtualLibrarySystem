@@ -5,19 +5,50 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static Scanner scanner = new Scanner(System.in);
+    private static BookManager bookManager;
+    private static SearchBook searchBook;
+
     public static void main(String[] args) {
         System.out.println("Starting from Here ");
         String filePath = "src//main//resources//Books.csv";
-        BookManager BM = new BookManager(filePath);
-        List<Book> bookList = BM.getBookList();
-        SearchBook sb = new SearchBook(bookList);
-        sb.searchBookInLibrary();
-        sb.selectBook();
-        sb.borrowBook();
-        System.out.println("Enter admin ID to view borrowing transactions: ");
-        try (Scanner sc = new Scanner(System.in)) {
-            String adminId = sc.next();
-            BM.viewBorrowTransactions(adminId);
+        bookManager = new BookManager(filePath);
+        List<Book> bookList = bookManager.getBookList();
+        searchBook = new SearchBook(bookList);
+        displayMainMenu();
+    }
+
+    private static void displayMainMenu() {
+        while (true) {
+            System.out.println("\nVirtual Library Main Menu:");
+            System.out.println("1. Search for a book");
+            System.out.println("2. Borrow a book");
+            System.out.println("3. View borrowing transactions (Admin)");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    searchBook.searchBookInLibrary();
+                    break;
+                case 2:
+                    searchBook.borrowBook();
+                    break;
+                case 3:
+                    System.out.print("Enter admin ID: ");
+                    String adminId = scanner.nextLine();
+                    bookManager.viewBorrowTransactions(adminId);
+                    break;
+                case 4:
+                    System.out.println("Exiting the application...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
         }
     }
 }
