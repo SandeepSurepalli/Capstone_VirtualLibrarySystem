@@ -108,11 +108,37 @@ public class SearchBook {
                     BorrowTransaction transaction = new BorrowTransaction(userId, selectedBook.getISBN());
                     BookManager.addBorrowTransaction(transaction);
                 } else {
-                    System.out.println("The book is out of stock.");
+                    System.out.println("Sorry, the book '" + selectedBook.getTitle() + "' is currently out of stock.");
+                    offerOptions();
                 }
             } else {
                 System.out.println("Borrowing cancelled.");
+                offerOptions();
             }
         }
     }
+
+    public void offerOptions() {
+        System.out.println("What would you like to do next?");
+        System.out.println("1. Return to the main menu");
+        System.out.println("2. Perform another search");
+        try (Scanner sc = new Scanner(System.in)) {
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    // Return to the main menu or exit the application
+                    System.out.println("Returning to the main menu...");
+                    break;
+                case 2:
+                    // Call the search method again
+                    searchBookInLibrary();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    offerOptions();
+                    break;
+            }
+        }
+    }
+
 }
