@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class SearchBook {
     public List<Book> matchedBooks = new ArrayList<Book>();
     List<Book> bookList;
+    private static Scanner scanner = new Scanner(System.in);
 
     public SearchBook(List<Book> bookList) {
         this.bookList = bookList;
@@ -136,7 +137,6 @@ public class SearchBook {
     }
 
     public void returnBook() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the ISBN of the book you want to return: ");
         String bookISBN = scanner.nextLine();
 
@@ -170,6 +170,8 @@ public class SearchBook {
             System.out.println("Return canceled.");
         }
     }
+
+
     private BorrowTransaction findBorrowTransaction(String userId, String bookISBN) {
         return BookManager.borrowTransactions.stream()
                 .filter(transaction -> transaction.getUserID().equals(userId) && transaction.getBookISBN().equals(bookISBN))
