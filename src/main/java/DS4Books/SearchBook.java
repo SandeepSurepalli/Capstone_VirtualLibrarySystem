@@ -9,10 +9,12 @@ public class SearchBook {
     public List<Book> matchedBooks = new ArrayList<Book>();
     List<Book> bookList;
     private static Scanner scanner = new Scanner(System.in);
+    private String userId;
 
     public SearchBook(List<Book> bookList) {
         this.bookList = bookList;
         this.matchedBooks = new ArrayList<Book>();
+        this.userId = userId;
     }
 
     public String getBookDetailsFromUser() {
@@ -37,6 +39,19 @@ public class SearchBook {
                 matchedBooks.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
             else if (ISBN.equalsIgnoreCase(searchTerm))
                 matchedBooks.add(new Book(title, author, ISBN, genre, publicationDate, numberOfCopies));
+        }
+        System.out.print("Enter a book title or ISBN: ");
+        String searchCriteria = scanner.nextLine();
+
+        List<Book> matchedBooks = searchBooks(searchCriteria);
+        if (matchedBooks.isEmpty()) {
+            System.out.println("No books found matching your criteria.");
+            return;
+        }
+
+        // Check for overdue books before displaying search results
+        if (BookManager.checkOverdueBooks(userId)) {
+            System.out.println("** Please note: You have overdue books. Please return them as soon as possible. **");
         }
         printSearchedBook(searchTerm, matchedBooks);
     }
