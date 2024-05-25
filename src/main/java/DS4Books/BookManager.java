@@ -2,6 +2,7 @@ package DS4Books;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -171,13 +172,35 @@ public class BookManager {
         boolean hasOverdueBooks = false;
         for (BorrowTransaction transaction : borrowTransactions) {
             if (transaction.getUserID().equals(userId) && transaction.getReturnDate() == null) {
-                if (transaction.dueDate.before(new Date())) { // Check if due date has passed and not returned
+                if (transaction.getDueDate().before(new Date())) {
                     hasOverdueBooks = true;
-                    break; // Exit loop after finding one overdue book
+                    break;
                 }
             }
         }
         return hasOverdueBooks;
     }
+
+    public static void notifyOverdueBooks(String userId) {
+        List<BorrowTransaction> overdueTransactions = borrowTransactions.stream()
+                .filter(transaction -> transaction.getUserID().equals(userId) && transaction.getReturnDate() == null && transaction.getDueDate().before(new Date()))
+                .collect(Collectors.toList());
+
+        if (!overdueTransactions.isEmpty()) {
+            System.out.println("You have the following overdue books:");
+            for (BorrowTransaction transaction : overdueTransactions) {
+                // Fetch the book details using the ISBN from the transaction
+                Book overdueBook = bookList.stream()
+                        .filter(book -> book.getISBN().equals(transaction.getBookISBN()))
+                        .findFirst()
+                        .orElse(null);
+
+                if (overdueBook != null) {
+                    System.out.println("- " + overdueBook.getTitle() + " (ISBN: " + overdueBook.getISBN() + ")");
+                }
+            }
+        }
+    }
+
 
 }

@@ -15,8 +15,11 @@ public class Main {
         bookManager = new BookManager(filePath);
         List<Book> bookList = bookManager.getBookList();
         searchBook = new SearchBook(bookList);
+        String userId = "user123";
+        BookManager.notifyOverdueBooks(userId);
         displayMainMenu();
     }
+
 
     static void displayMainMenu() {
         String userId = "user123";

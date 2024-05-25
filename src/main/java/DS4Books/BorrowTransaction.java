@@ -7,7 +7,7 @@ public class BorrowTransaction {
     private String bookISBN;
     private Date borrowingDate;
     private Date returnDate;
-    Date dueDate;
+    private Date dueDate;
 
     public BorrowTransaction(String userID, String bookISBN) {
         this.userID = userID;
@@ -47,5 +47,9 @@ public class BorrowTransaction {
 
     public Date getReturnDate() {
         return returnDate;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
     }
 }
