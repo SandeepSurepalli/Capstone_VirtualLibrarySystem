@@ -7,10 +7,10 @@ public class BorrowTransaction {
     private String bookISBN;
     private Date borrowingDate;
 
-    public BorrowTransaction(String userID, String bookISBN, Date borrowingDate) {
+    public BorrowTransaction(String userID, String bookISBN) {
         this.userID = userID;
         this.bookISBN = bookISBN;
-        this.borrowingDate = borrowingDate;
+        this.borrowingDate = new Date();
     }
 
     public String getUserID() {

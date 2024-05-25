@@ -14,11 +14,10 @@ public class Main {
         sb.searchBookInLibrary();
         sb.selectBook();
         sb.borrowBook();
-        System.out.println("Do you want to view borrowing transactions? : Y/N");
-        Scanner sc = new Scanner(System.in);
-        String viewTransactions = sc.next();
-        if (viewTransactions.equalsIgnoreCase("y")) {
-            BookManager.viewBorrowTransactions();
+        System.out.println("Enter admin ID to view borrowing transactions: ");
+        try (Scanner sc = new Scanner(System.in)) {
+            String adminId = sc.next();
+            BM.viewBorrowTransactions(adminId);
         }
     }
 }

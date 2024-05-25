@@ -1,9 +1,7 @@
 package DS4Books;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -26,6 +24,8 @@ public class BookManager {
     public static String fileType = "";
     public static int[] Books = new int[3];
     private static List<BorrowTransaction> borrowTransactions = new ArrayList<>();
+    private static Set<String> adminIds = new HashSet<>();
+
 
 
     public BookManager(String filePath) {
@@ -134,18 +134,26 @@ public class BookManager {
         System.out.println(Books[2] + " are not added due to duplicate");
     }
 
-    public static void addBorrowTransaction(String userID, String bookISBN, Date borrowingDate) {
-        borrowTransactions.add(new BorrowTransaction(userID, bookISBN, borrowingDate));
+    public static void addBorrowTransaction(BorrowTransaction transaction) {
+        borrowTransactions.add(transaction);
+        System.out.println("Transaction logged: " + transaction);
     }
 
-    public static void viewBorrowTransactions() {
-        if (borrowTransactions.isEmpty()) {
-            System.out.println("No borrowing transactions found.");
-        } else {
-            for (BorrowTransaction transaction : borrowTransactions) {
-                System.out.println(transaction);
+    public static void viewBorrowTransactions(String adminId) {
+        if (isAdmin(adminId)) {
+            if (borrowTransactions.isEmpty()) {
+                System.out.println("No borrowing transactions found.");
+            } else {
+                for (BorrowTransaction transaction : borrowTransactions) {
+                    System.out.println(transaction);
+                }
             }
+        } else {
+            System.out.println("Access denied: Only admins can view the borrowing transactions.");
         }
+    }
+    private static boolean isAdmin(String userId) {
+        return adminIds.contains(userId);
     }
 
     public List<Book> getBookList() {
