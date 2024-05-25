@@ -12,6 +12,7 @@ public class SearchBook {
 
     public SearchBook(List<Book> bookList) {
         this.bookList = bookList;
+        this.matchedBooks = new ArrayList<Book>();
     }
 
     public String getBookDetailsFromUser() {
@@ -92,6 +93,9 @@ public class SearchBook {
         }
         System.out.println("Selected book details: " + selectedBook.getTitle());
         if (selectedBook.getNumberOfCopies() > 0) {
+            System.out.print("Enter your user ID: "); // Prompt for user ID
+            String userId = scanner.nextLine(); // Capture the user ID
+
             System.out.println("Do you want to proceed ? : Y/N");
             try (Scanner sc = new Scanner(System.in)) {
                 String proceed = sc.next();
@@ -99,17 +103,17 @@ public class SearchBook {
                     long availableCopies = selectedBook.getNumberOfCopies();
 
                     selectedBook.setNumberOfCopies(availableCopies - 1);
-                    selectedBook.updateStatus(); // Update the book's status
+                    selectedBook.updateStatus();
                     System.out.println("The book has been borrowed successfully. Remaining Copies: " + selectedBook.getNumberOfCopies());
                     System.out.println("Book Status: " + selectedBook.getStatus());
 
-                    // Log the transaction
-                    BorrowTransaction transaction = new BorrowTransaction(null, selectedBook.getISBN());
+                    // Log the transaction (borrow) with captured user ID
+                    BorrowTransaction transaction = new BorrowTransaction(userId, selectedBook.getISBN());
                     BookManager.addBorrowTransaction(transaction);
                 }
             }
         } else {
-            System.out.println("Alert: The requested book, '" + selectedBook.getTitle() + "', is out of stock.");
+            System.err.println("ALERT: The requested book, '" + selectedBook.getTitle() + "', is out of stock.");
             offerOptions();
         }
     }
@@ -140,7 +144,7 @@ public class SearchBook {
         System.out.print("Enter the ISBN of the book you want to return: ");
         String bookISBN = scanner.nextLine();
 
-        System.out.print("Enter your user ID: ");
+        System.out.print("Enter your user ID: "); // Capture the user ID for return logging
         String userId = scanner.nextLine();
 
         Book bookToReturn = searchBookByISBN(bookISBN);
@@ -166,7 +170,7 @@ public class SearchBook {
             bookToReturn.updateStatus();
             System.out.println("Book returned successfully.");
 
-            // Update return date in the transaction record
+            // Update return date in the existing transaction record
             transaction.setReturnDate(new Date());
             BookManager.borrowTransactions.set(BookManager.borrowTransactions.indexOf(transaction), transaction);
 
