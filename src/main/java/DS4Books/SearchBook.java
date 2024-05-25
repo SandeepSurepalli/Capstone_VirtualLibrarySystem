@@ -144,7 +144,7 @@ public class SearchBook {
         System.out.print("Enter the ISBN of the book you want to return: ");
         String bookISBN = scanner.nextLine();
 
-        System.out.print("Enter your user ID: "); // Capture the user ID for return logging
+        System.out.print("Enter your user ID: ");
         String userId = scanner.nextLine();
 
         Book bookToReturn = searchBookByISBN(bookISBN);
@@ -170,11 +170,15 @@ public class SearchBook {
             bookToReturn.updateStatus();
             System.out.println("Book returned successfully.");
 
-            // Update return date in the existing transaction record
             transaction.setReturnDate(new Date());
-            BookManager.borrowTransactions.set(BookManager.borrowTransactions.indexOf(transaction), transaction);
 
-            System.out.println("Return logged: User ID: " + userId + ", Book ISBN: " + bookISBN + ", Return Date: " + transaction.getReturnDate());
+            int transactionIndex = BookManager.borrowTransactions.indexOf(transaction);
+            if (transactionIndex != -1) { // Check if transaction found
+                BookManager.borrowTransactions.set(transactionIndex, transaction);
+                System.out.println("Return logged: User ID: " + userId + ", Book ISBN: " + bookISBN + ", Return Date: " + transaction.getReturnDate());
+            } else {
+                System.err.println("Error: Transaction not found for update.");
+            }
         } else {
             System.out.println("Return canceled.");
         }
