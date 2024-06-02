@@ -63,7 +63,8 @@ public class Main {
             System.out.println("5. Display total books");
             System.out.println("6. Display number of borrowed books"); // Added menu option
             System.out.println("7. Display list of borrowed books titles"); // Added menu option
-            System.out.println("8. Exit");
+            System.out.println("8. Display most borrowed books list");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -95,7 +96,10 @@ public class Main {
                 case 7: // Call to display list of borrowed book titles
                     BookManager.displayBorrowedBooksList();
                     break;
-                case 8:
+                case 8: // This would be a new case for the new menu item
+                    BookManager.displayTopBorrowedBooks();
+                    break;
+                case 9:
                     System.out.println("Exiting the application...");
                     System.exit(0);
                     break;

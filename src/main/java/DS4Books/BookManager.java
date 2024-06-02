@@ -297,4 +297,15 @@ public class BookManager {
 
         return topBooks;
     }
+
+    public static void displayTopBorrowedBooks() {
+        Map<String, Long> borrowCounts = borrowTransactions.stream()
+                .collect(Collectors.groupingBy(BorrowTransaction::getBookISBN, Collectors.counting()));
+
+        List<Book> sortedBooks = bookList.stream()
+                .sorted(Comparator.comparing(book -> borrowCounts.getOrDefault(book.getISBN(), 0L), Comparator.reverseOrder()))
+                .collect(Collectors.toList());
+
+        sortedBooks.forEach(book -> System.out.println(book.getTitle() + " - Borrowed: " + borrowCounts.getOrDefault(book.getISBN(), 0L) + " times"));
+    }
 }
