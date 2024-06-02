@@ -16,6 +16,38 @@ public class Main {
         String userId = "user123";
         bookManager.alertOnOverdueBooks(userId);
         displayMainMenu();
+
+        BookManager manager = new BookManager("Books.json");
+        List<Book> bookList = manager.getBookList();
+        if (bookList != null) {
+            for (Book book : bookList) {
+                System.out.println(book);
+            }
+        }
+
+        // Add a borrow transaction
+        if (bookList != null && !bookList.isEmpty()) {
+            Book bookToBorrow = bookList.get(0);
+            BorrowTransaction transaction = new BorrowTransaction("user123", bookToBorrow, new java.util.Date(), new java.util.Date(System.currentTimeMillis() + 7L * 24 * 60 * 60 * 1000)); // Due date is 7 days from now
+            BookManager.addBorrowTransaction(transaction);
+        }
+
+        // View borrow transactions (admin access)
+        BookManager.viewBorrowTransactions("admin1");
+
+        // Check for overdue books
+        BookManager.checkOverdueBooks("user123");
+
+        // CLI for library statistics overview
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter 'stats' to view library statistics overview:");
+        String command = scanner.nextLine();
+
+        if ("stats".equalsIgnoreCase(command)) {
+            BookManager.displayLibraryStatistics();
+        }
+
+        scanner.close();
     }
 
 

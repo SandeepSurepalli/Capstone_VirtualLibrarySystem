@@ -221,4 +221,21 @@ public class BookManager {
         }
     }
 
+    public static void displayLibraryStatistics() {
+        int totalBooks = bookList.size();
+        long totalCopies = bookList.stream().mapToLong(Book::getNumberOfCopies).sum();
+        long inStockBooks = bookList.stream().filter(book -> book.getNumberOfCopies() > 0).count();
+        long outOfStockBooks = totalBooks - inStockBooks;
+        int totalBorrowTransactions = borrowTransactions.size();
+        long overdueTransactions = borrowTransactions.stream().filter(BorrowTransaction::isOverdue).count();
+
+        System.out.println("Library Statistics Overview");
+        System.out.println("---------------------------");
+        System.out.printf("Total number of books: %d%n", totalBooks);
+        System.out.printf("Total number of copies: %d%n", totalCopies);
+        System.out.printf("Books in stock: %d%n", inStockBooks);
+        System.out.printf("Books out of stock: %d%n", outOfStockBooks);
+        System.out.printf("Total borrow transactions: %d%n", totalBorrowTransactions);
+        System.out.printf("Overdue transactions: %d%n", overdueTransactions);
+    }
 }

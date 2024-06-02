@@ -8,6 +8,7 @@ public class BorrowTransaction {
     private Date borrowingDate;
     private Date returnDate;
     private Date dueDate;
+    private Book book;
 
     public BorrowTransaction(String userID, String bookISBN) {
         this.userID = userID;
@@ -22,6 +23,13 @@ public class BorrowTransaction {
         this.bookISBN = bookISBN;
         this.borrowingDate = new Date();
         this.returnDate = returnDate;
+    }
+
+    public BorrowTransaction(String userID, Book book, Date borrowDate, Date dueDate) {
+        this.userID = userID;
+        this.book = book;
+        this.borrowingDate = borrowDate;
+        this.dueDate = dueDate;
     }
 
     public String getUserID() {
@@ -51,5 +59,10 @@ public class BorrowTransaction {
 
     public Date getDueDate() {
         return dueDate;
+    }
+
+    public boolean isOverdue() {
+        Date currentDate = new Date();
+        return currentDate.after(dueDate);
     }
 }
