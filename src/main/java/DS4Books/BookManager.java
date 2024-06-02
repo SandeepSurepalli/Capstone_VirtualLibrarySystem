@@ -353,19 +353,25 @@ public class BookManager {
         Map<String, Integer> trends = getBorrowingTrends(timeframe);
         System.out.println("Borrowing trends for " + timeframe + ":");
 
-        // Display trends in descending order to highlight the most popular periods
-        List<Map.Entry<String, Integer>> sortedTrends = trends.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .collect(Collectors.toList());
+        // Convert the map into a list and sort it by values in descending order
+        List<Map.Entry<String, Integer>> sortedTrends = new ArrayList<>(trends.entrySet());
+        sortedTrends.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        // Display data in a table for better readability
-        System.out.printf("%-20s %s%n", "Period", "Borrows");
-        sortedTrends.forEach(entry -> System.out.printf("%-20s %d%n", entry.getKey(), entry.getValue()));
+        // Find the highest value, indicating the peak borrowing period
+        Integer highest = sortedTrends.size() >= 1 ? sortedTrends.get(0).getValue() : 0;
 
-        // Highlight peak borrowing period
-        if(!sortedTrends.isEmpty()) {
-            Map.Entry<String, Integer> peak = sortedTrends.get(0);
-            System.out.printf("Peak borrowing period: %s with %d borrows%n", peak.getKey(), peak.getValue());
+        // Output the trend data in a tabular format
+        System.out.println("+-----------------+-----------+");
+        System.out.println("| Period          | Borrows   |");
+        System.out.println("+-----------------+-----------+");
+        sortedTrends.forEach(entry -> System.out.printf("| %-15s | %-9d |%n", entry.getKey(), entry.getValue()));
+        System.out.println("+-----------------+-----------+");
+
+        // If possible, highlight peak borrowing period
+        if (highest > 0) {
+            System.out.printf("Peak borrowing period: %s with %d borrows.%n",
+                    sortedTrends.get(0).getKey(), highest);
         }
     }
+
 }
