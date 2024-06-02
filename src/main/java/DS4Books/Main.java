@@ -61,8 +61,8 @@ public class Main {
             System.out.println("3. Return a book");
             System.out.println("4. View borrowing transactions (Admin)");
             System.out.println("5. Display total books");
-            System.out.println("6. Display borrowed books count");
-            System.out.println("7. Display borrowed books list");
+            System.out.println("6. Display number of borrowed books"); // Added menu option
+            System.out.println("7. Display list of borrowed books titles"); // Added menu option
             System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -89,10 +89,10 @@ public class Main {
                 case 5:
                     BookManager.displayTotalNumberOfBooks();
                     break;
-                case 6:
+                case 6: // Call to display number of borrowed books
                     BookManager.displayNumberOfBorrowedBooks();
                     break;
-                case 7:
+                case 7: // Call to display list of borrowed book titles
                     BookManager.displayBorrowedBooksList();
                     break;
                 case 8:
