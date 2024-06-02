@@ -351,27 +351,21 @@ public class BookManager {
 
     public static void displayBorrowingTrends(TimeFrame timeframe) {
         Map<String, Integer> trends = getBorrowingTrends(timeframe);
-        System.out.println("Borrowing trends for " + timeframe + ":");
 
-        // Convert the map into a list and sort it by values in descending order
-        List<Map.Entry<String, Integer>> sortedTrends = new ArrayList<>(trends.entrySet());
-        sortedTrends.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-
-        // Find the highest value, indicating the peak borrowing period
-        Integer highest = sortedTrends.size() >= 1 ? sortedTrends.get(0).getValue() : 0;
-
-        // Output the trend data in a tabular format
+        System.out.printf("%nBorrowing trends for %s:%n", timeframe);
         System.out.println("+-----------------+-----------+");
         System.out.println("| Period          | Borrows   |");
         System.out.println("+-----------------+-----------+");
-        sortedTrends.forEach(entry -> System.out.printf("| %-15s | %-9d |%n", entry.getKey(), entry.getValue()));
+
+        trends.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .forEach(entry -> System.out.printf("| %-15s | %-10d |%n", entry.getKey(), entry.getValue()));
+
         System.out.println("+-----------------+-----------+");
 
-        // If possible, highlight peak borrowing period
-        if (highest > 0) {
-            System.out.printf("Peak borrowing period: %s with %d borrows.%n",
-                    sortedTrends.get(0).getKey(), highest);
-        }
-    }
+        String peakPeriod = Collections.max(trends.entrySet(), Map.Entry.comparingByValue()).getKey();
+        Integer peakBorrows = Collections.max(trends.entrySet(), Map.Entry.comparingByValue()).getValue();
 
+        System.out.println("Peak Borrowing Period: " + peakPeriod + " with " + peakBorrows + " borrows.");
+    }
 }
