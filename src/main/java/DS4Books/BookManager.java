@@ -157,6 +157,7 @@ public class BookManager {
             System.out.println("Access denied: Only admins can view the borrowing transactions.");
         }
     }
+
     private static boolean isAdmin(String userId) {
         return adminIds.contains(userId);
     }
@@ -352,14 +353,21 @@ public class BookManager {
         Map<String, Integer> trends = getBorrowingTrends(timeframe);
         System.out.println("Borrowing trends for " + timeframe + ":");
 
-        // Consider sorting by key or value based on the requirement
-        trends.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey()) // or comparingByValue() for sorting by counts
-                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+        // Sort by value to find the most borrowed periods
+        List<Map.Entry<String, Integer>> sortedTrends = trends.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toList());
 
-        // Additional idea: Highlight the period with the highest borrow count
-        Optional<Map.Entry<String, Integer>> peakPeriod = trends.entrySet().stream()
-                .max(Map.Entry.comparingByValue());
-        peakPeriod.ifPresent(maxEntry -> System.out.println("Peak period: " + maxEntry.getKey() + " with " + maxEntry.getValue() + " borrows."));
+        // Display trends in a tabular format
+        System.out.printf("%-15s %-10s%n", "Period", "Borrows");
+        sortedTrends.forEach(entry ->
+                System.out.printf("%-15s %-10s%n", entry.getKey(), entry.getValue())
+        );
+
+        // Highlight the peak borrowing period
+        if (!sortedTrends.isEmpty()) {
+            Map.Entry<String, Integer> peak = sortedTrends.get(0);
+            System.out.printf("Peak borrowing period: %s with %d borrows%n", peak.getKey(), peak.getValue());
+        }
     }
 }
