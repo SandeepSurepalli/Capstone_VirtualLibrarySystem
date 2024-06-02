@@ -64,7 +64,8 @@ public class Main {
             System.out.println("6. Display number of borrowed books"); // Added menu option
             System.out.println("7. Display list of borrowed books titles"); // Added menu option
             System.out.println("8. Display most borrowed books list");
-            System.out.println("9. Exit");
+            System.out.println("9. Analyze Borrowing Trends");
+            System.out.println("10. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -100,6 +101,9 @@ public class Main {
                     BookManager.displayTopBorrowedBooks();
                     break;
                 case 9:
+                    BookManager.getBorrowingTrends();
+                    break;
+                case 10:
                     System.out.println("Exiting the application...");
                     System.exit(0);
                     break;

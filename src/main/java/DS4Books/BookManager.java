@@ -1,6 +1,7 @@
 package DS4Books;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -307,5 +308,40 @@ public class BookManager {
                 .collect(Collectors.toList());
 
         sortedBooks.forEach(book -> System.out.println(book.getTitle() + " - Borrowed: " + borrowCounts.getOrDefault(book.getISBN(), 0L) + " times"));
+    }
+
+    public enum TimeFrame {
+        MONTHLY,
+        QUARTERLY,
+        YEARLY
+    }
+
+    public Map<String, Integer> getBorrowingTrends(TimeFrame timeframe) {
+        HashMap<String, Integer> timeframeBorrowCounts = new HashMap<>();
+
+        // Group transactions by timeframe (using LocalDate or custom logic)
+        for (BorrowTransaction transaction : borrowTransactions) {
+            Date borrowingDate = transaction.getBorrowingDate();
+            String timeframeKey = getTimeframeKey(borrowingDate, timeframe);
+            timeframeBorrowCounts.put(timeframeKey, timeframeBorrowCounts.getOrDefault(timeframeKey, 0) + 1);
+        }
+
+        return timeframeBorrowCounts;
+    }
+
+    private String getTimeframeKey(Date date, TimeFrame timeframe) {
+        LocalDate localDate = LocalDate.parse(date.toString()); // Assuming conversion to LocalDate
+
+        switch (timeframe) {
+            case MONTHLY:
+                return localDate.getYear() + "-" + localDate.getMonthValue();
+            case QUARTERLY:
+                int quarter = (localDate.getMonthValue() - 1) / 3 + 1;
+                return localDate.getYear() + "-Q" + quarter;
+            case YEARLY:
+                return String.valueOf(localDate.getYear());
+            default:
+                throw new IllegalArgumentException("Unsupported TimeFrame");
+        }
     }
 }
