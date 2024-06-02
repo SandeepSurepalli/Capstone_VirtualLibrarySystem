@@ -243,4 +243,22 @@ public class BookManager {
         int totalBooks = bookList.size();
         System.out.printf("Total number of books in the library: %d%n", totalBooks);
     }
+
+    public static void displayNumberOfBorrowedBooks() {
+        long borrowedCount = bookList.stream().filter(book -> book.isBorrowed()).count();
+        System.out.printf("Number of currently borrowed books: %d%n", borrowedCount);
+    }
+
+    public static void displayBorrowedBooksList() {
+        List<Book> borrowedBooks = bookList.stream().filter(Book::isBorrowed).collect(Collectors.toList());
+        if (borrowedBooks.isEmpty()) {
+            System.out.println("No books are currently borrowed.");
+        } else {
+            System.out.println("List of currently borrowed books:");
+            for (int i = 0; i < borrowedBooks.size(); i++) {
+                System.out.printf("%d. %s%n", i + 1, borrowedBooks.get(i).getTitle());
+            }
+        }
+    }
+
 }

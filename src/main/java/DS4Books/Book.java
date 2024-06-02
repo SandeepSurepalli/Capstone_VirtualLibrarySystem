@@ -8,6 +8,8 @@ public class Book {
     private String publicationDate;
     private long numberOfCopies;
     private String status;
+    private boolean borrowed;
+
 
     public Book(String bookTitle, String bookAuthor, String bookISBN, String bookGenre, String bookPublicationDate, long bookCopies) {
         this.title = bookTitle;
@@ -17,6 +19,7 @@ public class Book {
         this.publicationDate = bookPublicationDate;
         this.numberOfCopies = bookCopies;
         updateStatus();
+        this.borrowed = false;
     }
 
     public String getTitle() {
@@ -79,4 +82,11 @@ public class Book {
         return status;
     }
 
+    public boolean isBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        this.borrowed = borrowed;
+    }
 }
