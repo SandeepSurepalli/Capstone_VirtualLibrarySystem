@@ -353,21 +353,17 @@ public class BookManager {
         Map<String, Integer> trends = getBorrowingTrends(timeframe);
         System.out.println("Borrowing trends for " + timeframe + ":");
 
-        // Sort by value to find the most borrowed periods
-        List<Map.Entry<String, Integer>> sortedTrends = trends.entrySet().stream()
+
+        // Display the trends in a sorted manner to spot patterns more easily.
+        trends.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .collect(Collectors.toList());
+                .forEach(entry -> System.out.printf("%s: %d borrows%n", entry.getKey(), entry.getValue()));
 
-        // Display trends in a tabular format
-        System.out.printf("%-15s %-10s%n", "Period", "Borrows");
-        sortedTrends.forEach(entry ->
-                System.out.printf("%-15s %-10s%n", entry.getKey(), entry.getValue())
-        );
-
-        // Highlight the peak borrowing period
-        if (!sortedTrends.isEmpty()) {
-            Map.Entry<String, Integer> peak = sortedTrends.get(0);
-            System.out.printf("Peak borrowing period: %s with %d borrows%n", peak.getKey(), peak.getValue());
-        }
+        // Highlight the peak borrowing period.
+        trends.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .ifPresent(maxEntry ->
+                        System.out.printf("Peak borrowing period: %s (%d borrows)%n", maxEntry.getKey(), maxEntry.getValue())
+                );
     }
 }
