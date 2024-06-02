@@ -92,7 +92,6 @@ public class Main {
                 case 6:
                     BookManager.displayNumberOfBorrowedBooks();
                     break;
-
                 case 7:
                     BookManager.displayBorrowedBooksList();
                     break;
