@@ -3,6 +3,8 @@ package DS4Books;
 import java.util.List;
 import java.util.Scanner;
 
+import static DS4Books.BookManager.TimeFrame.MONTHLY;
+
 public class Main {
 
     private static Scanner scanner = new Scanner(System.in);
@@ -101,7 +103,7 @@ public class Main {
                     BookManager.displayTopBorrowedBooks();
                     break;
                 case 9:
-                    BookManager.getBorrowingTrends();
+                    BookManager.displayBorrowingTrends(MONTHLY);
                     break;
                 case 10:
                     System.out.println("Exiting the application...");

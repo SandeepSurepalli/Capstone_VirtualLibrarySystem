@@ -316,7 +316,10 @@ public class BookManager {
         YEARLY
     }
 
-    public Map<String, Integer> getBorrowingTrends(TimeFrame timeframe) {
+    public static Map<String, Integer> getBorrowingTrends(TimeFrame timeframe) {
+        if (timeframe == null) {
+            throw new IllegalArgumentException("Timeframe cannot be null");
+        }
         HashMap<String, Integer> timeframeBorrowCounts = new HashMap<>();
 
         // Group transactions by timeframe (using LocalDate or custom logic)
@@ -329,7 +332,7 @@ public class BookManager {
         return timeframeBorrowCounts;
     }
 
-    private String getTimeframeKey(Date date, TimeFrame timeframe) {
+    private static String getTimeframeKey(Date date, TimeFrame timeframe) {
         LocalDate localDate = LocalDate.parse(date.toString()); // Assuming conversion to LocalDate
 
         switch (timeframe) {
@@ -342,6 +345,14 @@ public class BookManager {
                 return String.valueOf(localDate.getYear());
             default:
                 throw new IllegalArgumentException("Unsupported TimeFrame");
+        }
+    }
+
+    public static void displayBorrowingTrends(TimeFrame timeframe) {
+        Map<String, Integer> trends = getBorrowingTrends(timeframe);
+        System.out.println("Borrowing trends for " + timeframe + ":");
+        for (Map.Entry<String, Integer> entry : trends.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
 }
