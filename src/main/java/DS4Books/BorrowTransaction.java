@@ -9,6 +9,7 @@ public class BorrowTransaction {
     private Date returnDate;
     private Date dueDate;
     private Book book;
+    public static int borrowCount = 0;
 
     public BorrowTransaction(String userID, String bookISBN) {
         this.userID = userID;

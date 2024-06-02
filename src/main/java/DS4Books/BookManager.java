@@ -261,4 +261,40 @@ public class BookManager {
         }
     }
 
+    public List<Book> getTopBorrowedBooks(int count) {
+
+        if (count <= 0) {
+            throw new IllegalArgumentException("Count must be a positive integer");
+        }
+
+        // HashMap to store ISBNs and their borrow counts
+        HashMap<String, Integer> borrowCountMap = new HashMap<>();
+
+        // Iterate through all borrow transactions
+        for (BorrowTransaction transaction : borrowTransactions) {
+            String isbn = transaction.getBookISBN();
+            int currentCount = borrowCountMap.getOrDefault(isbn, 0);
+            borrowCountMap.put(isbn, currentCount + 1);
+        }
+
+        // Sort the HashMap by borrow count (descending order) using Apache Commons Collections
+        List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(borrowCountMap.entrySet());
+        Collections.sort(sortedList, (entry1, entry2) -> entry2.getValue() - entry1.getValue());
+
+        // Extract top 'count' entries
+        List<Book> topBooks = new ArrayList<>();
+        int extractedCount = 0;
+        for (Map.Entry<String, Integer> entry : sortedList) {
+            Book book = bookList.stream().filter(searchBook -> searchBook.getISBN().equals(entry.getKey())).findFirst().orElse(null); // Assuming a method to get book by ISBN
+            if (book != null) {
+                topBooks.add(book);
+                extractedCount++;
+            }
+            if (extractedCount >= count) {
+                break;
+            }
+        }
+
+        return topBooks;
+    }
 }

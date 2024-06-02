@@ -122,6 +122,7 @@ public class SearchBook {
                     // Log the transaction (borrow) with captured user ID
                     BorrowTransaction transaction = new BorrowTransaction(userId, selectedBook.getISBN());
                     BookManager.addBorrowTransaction(transaction);
+                    BorrowTransaction.borrowCount++;
                 }
             }
         } else {
