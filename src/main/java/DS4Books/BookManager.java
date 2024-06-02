@@ -238,4 +238,9 @@ public class BookManager {
         System.out.printf("Total borrow transactions: %d%n", totalBorrowTransactions);
         System.out.printf("Overdue transactions: %d%n", overdueTransactions);
     }
+
+    public static void displayTotalNumberOfBooks() {
+        int totalBooks = bookList.size();
+        System.out.printf("Total number of books in the library: %d%n", totalBooks);
+    }
 }

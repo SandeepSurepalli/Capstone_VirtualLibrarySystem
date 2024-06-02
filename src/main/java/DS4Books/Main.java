@@ -60,7 +60,8 @@ public class Main {
             System.out.println("2. Borrow a book");
             System.out.println("3. Return a book");
             System.out.println("4. View borrowing transactions (Admin)");
-            System.out.println("5. Exit");
+            System.out.println("5. Display total books");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -84,6 +85,9 @@ public class Main {
                     bookManager.viewBorrowTransactions(adminId);
                     break;
                 case 5:
+                    BookManager.displayTotalNumberOfBooks();
+                    break;
+                case 6:
                     System.out.println("Exiting the application...");
                     System.exit(0);
                     break;
