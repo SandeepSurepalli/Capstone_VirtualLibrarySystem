@@ -399,4 +399,31 @@ public class BookManager {
 
         return topGenres;
     }
+
+    public static void displayGenrePopularity() {
+        HashMap<String, Integer> genreBorrowCounts = calculateGenreBorrowCounts();
+        List<Map.Entry<String, Integer>> sortedGenres = genreBorrowCounts.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .limit(5) // or any specified count
+                .collect(Collectors.toList());
+
+        System.out.println("Top Genres by Popularity:");
+        for (Map.Entry<String, Integer> genre : sortedGenres) {
+            System.out.println("Genre: " + genre.getKey() + " - Borrows: " + genre.getValue());
+        }
+    }
+
+    private static HashMap<String, Integer> calculateGenreBorrowCounts() {
+        HashMap<String, Integer> counts = new HashMap<>();
+        for (BorrowTransaction transaction : borrowTransactions) {
+            String genre = bookList.stream()
+                    .filter(book -> book.getISBN().equals(transaction.getBookISBN()))
+                    .findFirst()
+                    .map(Book::getGenre)
+                    .orElse("Unknown Genre");
+            counts.put(genre, counts.getOrDefault(genre, 0) + 1);
+        }
+        return counts;
+    }
+
 }
