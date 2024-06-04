@@ -1,6 +1,7 @@
 package DS4Books;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -321,20 +322,16 @@ public class BookManager {
         if (timeframe == null) {
             throw new IllegalArgumentException("Timeframe cannot be null");
         }
-        HashMap<String, Integer> timeframeBorrowCounts = new HashMap<>();
-
-        // Group transactions by timeframe (using LocalDate or custom logic)
-        for (BorrowTransaction transaction : borrowTransactions) {
-            Date borrowingDate = transaction.getBorrowingDate();
-            String timeframeKey = getTimeframeKey(borrowingDate, timeframe);
-            timeframeBorrowCounts.put(timeframeKey, timeframeBorrowCounts.getOrDefault(timeframeKey, 0) + 1);
-        }
-
-        return timeframeBorrowCounts;
+        return borrowTransactions.stream()
+                .collect(Collectors.groupingBy(transaction -> getTimeframeKey(transaction.getBorrowingDate(), timeframe)))
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().size()));
     }
 
     private static String getTimeframeKey(Date date, TimeFrame timeframe) {
-        LocalDate localDate = LocalDate.parse(date.toString()); // Assuming conversion to LocalDate
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(formatter.format(date));
 
         switch (timeframe) {
             case MONTHLY:
