@@ -67,9 +67,8 @@ public class Main {
             System.out.println("7. Display list of borrowed books titles"); // Added menu option
             System.out.println("8. Display most borrowed books list");
             System.out.println("9. Analyze Borrowing Trends");
-            System.out.println("10. Display genre popularity based on borrows");
+            System.out.println("10. Display genre popularity rankings.");
             System.out.println("11. Exit");
-            System.out.println("12. Display genre popularity based on borrows");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -113,9 +112,6 @@ public class Main {
                 case 11:
                     System.out.println("Exiting the application...");
                     System.exit(0);
-                    break;
-                case 12:
-                    bookManager.displayGenrePopularity();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

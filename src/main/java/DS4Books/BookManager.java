@@ -414,7 +414,7 @@ public class BookManager {
         }
     }
 
-    private static HashMap<String, Integer> calculateGenreBorrowCounts() {
+    static HashMap<String, Integer> calculateGenreBorrowCounts() {
         HashMap<String, Integer> counts = new HashMap<>();
         for (BorrowTransaction transaction : borrowTransactions) {
             String genre = bookList.stream()

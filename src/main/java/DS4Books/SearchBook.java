@@ -190,6 +190,8 @@ public class SearchBook {
             if (transactionIndex != -1) { // Check if transaction found
                 BookManager.borrowTransactions.set(transactionIndex, transaction);
                 System.out.println("Return logged: User ID: " + userId + ", Book ISBN: " + bookISBN + ", Return Date: " + transaction.getReturnDate());
+                BookManager.addBorrowTransaction(new BorrowTransaction(userId, bookISBN)); // Assuming transaction object construction with return flag
+                BookManager.calculateGenreBorrowCounts();
             } else {
                 System.err.println("Error: Transaction not found for update.");
             }
