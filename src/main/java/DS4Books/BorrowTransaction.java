@@ -10,6 +10,7 @@ public class BorrowTransaction {
     private Date dueDate;
     private Book book;
     public static int borrowCount = 0;
+    private String genre;
 
     public BorrowTransaction(String userID, String bookISBN) {
         this.userID = userID;
@@ -65,5 +66,13 @@ public class BorrowTransaction {
     public boolean isOverdue() {
         Date currentDate = new Date();
         return currentDate.after(dueDate);
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }

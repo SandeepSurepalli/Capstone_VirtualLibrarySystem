@@ -365,4 +365,38 @@ public class BookManager {
 
         System.out.println("Peak Borrowing Period: " + peakPeriod + " with " + peakBorrows + " borrows.");
     }
+
+    public List<String> getTrendingGenres(int count) {
+
+        if (count <= 0) {
+            throw new IllegalArgumentException("Count must be a positive integer");
+        }
+
+        // HashMap to store genre and their borrow counts
+        HashMap<String, Integer> genreBorrowCounts = new HashMap<>();
+
+        // Iterate through borrow transactions
+        for (BorrowTransaction transaction : borrowTransactions) {
+            String genre = transaction.getGenre();
+            int currentCount = genreBorrowCounts.getOrDefault(genre, 0);
+            genreBorrowCounts.put(genre, currentCount + 1);
+        }
+
+        // Sort genres by borrow count (descending order) using Apache Commons Collections
+        List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(genreBorrowCounts.entrySet());
+        Collections.sort(sortedList, (entry1, entry2) -> entry2.getValue() - entry1.getValue());
+
+        // Extract top 'count' genres
+        List<String> topGenres = new ArrayList<>();
+        int extractedCount = 0;
+        for (Map.Entry<String, Integer> entry : sortedList) {
+            topGenres.add(entry.getKey());
+            extractedCount++;
+            if (extractedCount >= count) {
+                break;
+            }
+        }
+
+        return topGenres;
+    }
 }
