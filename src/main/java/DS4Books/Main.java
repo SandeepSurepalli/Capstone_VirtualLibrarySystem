@@ -107,7 +107,7 @@ public class Main {
                     BookManager.displayBorrowingTrends(MONTHLY);
                     break;
                 case 10:
-                    BookManager.displayGenrePopularity();
+                    bookManager.displayGenrePopularity();
                     break;
                 case 11:
                     System.out.println("Exiting the application...");
