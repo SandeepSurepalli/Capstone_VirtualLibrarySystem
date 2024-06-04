@@ -142,6 +142,7 @@ public class BookManager {
 
     public static void addBorrowTransaction(BorrowTransaction transaction) {
         borrowTransactions.add(transaction);
+        calculateGenreBorrowCounts();
         System.out.println("Transaction logged: " + transaction);
     }
 
