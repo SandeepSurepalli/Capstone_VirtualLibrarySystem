@@ -145,7 +145,7 @@ public class BookManager {
     public static void addBorrowTransaction(BorrowTransaction transaction) {
         borrowTransactions.add(transaction);
         Book borrowedBook = transaction.getBorrowedBook(); // Assuming getter
-        Author author = borrowedBook.getAuthor(); // Assuming getter
+        Author author = transaction.getBorrowedBook().getAuthor(); // Corrected to retrieve the author from the borrowed book
         updateAuthorPopularity(author);
         calculateGenreBorrowCounts(); // Ensure genre popularity is updated in real-time
         displayGenrePopularity();

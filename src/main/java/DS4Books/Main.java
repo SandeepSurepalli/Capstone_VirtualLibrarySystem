@@ -68,7 +68,7 @@ public class Main {
             System.out.println("8. Display most borrowed books list");
             System.out.println("9. Analyze Borrowing Trends");
             System.out.println("10. Display genre popularity rankings.");
-            System.out.println("11. Display top borrowed authors");
+            System.out.println("13. Display top borrowed authors");
             System.out.println("12. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -110,7 +110,7 @@ public class Main {
                 case 10:
                     BookManager.displayGenrePopularity();
                     break;
-                case 11:
+                case 13:
                     displayTopAuthorsByBorrowCount();;
                     break;
                 case 12:
@@ -125,9 +125,10 @@ public class Main {
     }
 
     public static void displayTopAuthorsByBorrowCount() {
-        List<Author> sortedAuthors = BookManager.getTopAuthorsByBorrowCount();
-        for (Author author : sortedAuthors) {
-            System.out.println("Author: " + author.getName() + " - Borrow Count: " + author.getBorrowCount());
+        List<Author> topAuthors = BookManager.getTopAuthorsByBorrowCount();
+        System.out.println("Top Authors Ranked by Borrow Counts:");
+        for (Author author : topAuthors) {
+            System.out.println(author.getName() + ": " + author.getBorrowCount() + " borrows");
         }
     }
 }
