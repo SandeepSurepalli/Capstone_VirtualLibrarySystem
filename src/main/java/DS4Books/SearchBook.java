@@ -193,6 +193,7 @@ public class SearchBook {
                 BookManager.addBorrowTransaction(new BorrowTransaction(userId, bookISBN)); // Assuming transaction object construction with return flag
                 BookManager.calculateGenreBorrowCounts();
                 BookManager.displayGenrePopularity();
+                BookManager.updateGenrePopularity();
             } else {
                 System.err.println("Error: Transaction not found for update.");
             }

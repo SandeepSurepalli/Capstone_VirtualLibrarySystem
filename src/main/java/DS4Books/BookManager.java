@@ -28,6 +28,7 @@ public class BookManager {
     public static int[] Books = new int[3];
     static List<BorrowTransaction> borrowTransactions = new ArrayList<>();
     private static Set<String> adminIds = new HashSet<>();
+    private static List<Map.Entry<String, Integer>> genrePopularityRanking;
 
     static {
         // Read admin IDs from a file, database, or hardcode them here (for simplicity)
@@ -144,6 +145,7 @@ public class BookManager {
         borrowTransactions.add(transaction);
         calculateGenreBorrowCounts(); // Ensure genre popularity is updated in real-time
         displayGenrePopularity();
+        updateGenrePopularity();
         System.out.println("Transaction logged: " + transaction);
     }
 
@@ -428,4 +430,23 @@ public class BookManager {
         return counts;
     }
 
+    static void updateGenrePopularity() {
+        // Initialize a map to store genre counts
+        Map<String, Integer> genreCounts = new HashMap<>();
+
+        // Loop through all borrow transactions
+        for (BorrowTransaction transaction : borrowTransactions) {
+            String genre = transaction.getGenre();
+
+            // Increment count for the genre (or set to 1 if not present)
+            genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
+        }
+
+        // Update genre popularity ranking based on genre counts (logic can be customized)
+        List<Map.Entry<String, Integer>> sortedGenres = new ArrayList<>(genreCounts.entrySet());
+        sortedGenres.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+        // Optional: Store the updated genre ranking (replace with your persistence mechanism)
+        genrePopularityRanking = sortedGenres;  // Assuming genrePopularityRanking is a List<Map.Entry<String, Integer>>
+    }
 }
