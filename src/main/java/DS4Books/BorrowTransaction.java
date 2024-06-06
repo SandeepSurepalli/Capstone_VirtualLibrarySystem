@@ -11,6 +11,7 @@ public class BorrowTransaction {
     private Book book;
     public static int borrowCount = 0;
     private String genre;
+    private Book borrowedBook;
 
     public BorrowTransaction(String userID, String bookISBN) {
         this.userID = userID;
@@ -74,5 +75,9 @@ public class BorrowTransaction {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Book getBorrowedBook() {
+        return borrowedBook;
     }
 }

@@ -29,7 +29,7 @@ public class SearchBook {
 
         for (Book bookItem : bookList) {
             String title = bookItem.getTitle();
-            String author = bookItem.getAuthor();
+            String author = bookItem.getAuthor().getName();
             String ISBN = bookItem.getISBN();
             String genre = bookItem.getGenre();
             String publicationDate = bookItem.getPublicationDate();

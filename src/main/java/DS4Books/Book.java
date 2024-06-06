@@ -9,6 +9,7 @@ public class Book {
     private long numberOfCopies;
     private String status;
     private boolean borrowed;
+    private Author author1;
 
 
     public Book(String bookTitle, String bookAuthor, String bookISBN, String bookGenre, String bookPublicationDate, long bookCopies) {
@@ -26,8 +27,8 @@ public class Book {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
+    public Author getAuthor() {
+        return author1;
     }
 
     public String getISBN() {

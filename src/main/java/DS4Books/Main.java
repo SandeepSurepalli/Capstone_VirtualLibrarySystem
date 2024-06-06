@@ -68,7 +68,8 @@ public class Main {
             System.out.println("8. Display most borrowed books list");
             System.out.println("9. Analyze Borrowing Trends");
             System.out.println("10. Display genre popularity rankings.");
-            System.out.println("11. Exit");
+            System.out.println("11. Display top borrowed authors");
+            System.out.println("12. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -109,7 +110,7 @@ public class Main {
                 case 10:
                     BookManager.displayGenrePopularity();
                     break;
-                case 11:
+                case 12:
                     System.out.println("Exiting the application...");
                     System.exit(0);
                     break;

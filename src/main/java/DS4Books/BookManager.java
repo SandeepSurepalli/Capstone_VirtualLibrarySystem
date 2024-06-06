@@ -29,6 +29,7 @@ public class BookManager {
     static List<BorrowTransaction> borrowTransactions = new ArrayList<>();
     private static Set<String> adminIds = new HashSet<>();
     private static List<Map.Entry<String, Integer>> genrePopularityRanking;
+    private static Map<String, Author> authorMap = new HashMap<>();
 
     static {
         // Read admin IDs from a file, database, or hardcode them here (for simplicity)
@@ -143,6 +144,9 @@ public class BookManager {
 
     public static void addBorrowTransaction(BorrowTransaction transaction) {
         borrowTransactions.add(transaction);
+        Book borrowedBook = transaction.getBorrowedBook(); // Assuming getter
+        Author author = borrowedBook.getAuthor(); // Assuming getter
+        updateAuthorPopularity(author);
         calculateGenreBorrowCounts(); // Ensure genre popularity is updated in real-time
         displayGenrePopularity();
         updateGenrePopularity();
@@ -449,4 +453,41 @@ public class BookManager {
         // Optional: Store the updated genre ranking (replace with your persistence mechanism)
         genrePopularityRanking = sortedGenres;  // Assuming genrePopularityRanking is a List<Map.Entry<String, Integer>>
     }
+
+    private static void updateAuthorPopularity(Author author) {
+        Author authorToUpdate = authorMap.get(author.getName());
+        if (authorToUpdate == null) {
+            // Author not found, create a new entry
+            authorToUpdate = author;
+            authorToUpdate.setBorrowCount(1); // Initial borrow count
+            authorMap.put(author.getName(), authorToUpdate);
+        } else {
+            // Author found, increment borrow count
+            authorToUpdate.setBorrowCount(authorToUpdate.getBorrowCount() + 1);
+        }
+    }
+
+    public static void displayTopBorrowedAuthors(int count) {
+        // Create a copy to avoid modifying original during sorting
+        Map<String, Integer> authorCountsCopy = new HashMap<>();
+        for (Author author : authorMap.values()) {
+            authorCountsCopy.put(author.getName(), author.getBorrowCount());
+        }
+
+        // Convert authorMap entries to a List, sort by borrow count (descending)
+        List<Map.Entry<String, Integer>> sortedAuthors = new ArrayList<>(authorCountsCopy.entrySet());
+        sortedAuthors.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+        // Print top 'count' authors
+        System.out.println("Top " + count + " Borrowed Authors:");
+        int printedCount = 0;
+        for (Map.Entry<String, Integer> entry : sortedAuthors) {
+            System.out.println(entry.getKey() + " (" + entry.getValue() + " borrows)");
+            printedCount++;
+            if (printedCount == count) {
+                break;
+            }
+        }
+    }
+
 }
