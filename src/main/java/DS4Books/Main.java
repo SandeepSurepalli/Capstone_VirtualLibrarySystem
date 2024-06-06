@@ -110,6 +110,9 @@ public class Main {
                 case 10:
                     BookManager.displayGenrePopularity();
                     break;
+                case 11:
+                    BookManager.displayTopBorrowedAuthors(2);
+                    break;
                 case 12:
                     System.out.println("Exiting the application...");
                     System.exit(0);
