@@ -457,14 +457,11 @@ public class BookManager {
     private static void updateAuthorPopularity(Author author) {
         Author authorToUpdate = authorMap.get(author.getName());
         if (authorToUpdate == null) {
-            // Author not found, create a new entry
-            authorToUpdate = author;
-            authorToUpdate.setBorrowCount(1); // Initial borrow count
+            authorToUpdate = new Author();
+            authorToUpdate.setName(author.getName());
             authorMap.put(author.getName(), authorToUpdate);
-        } else {
-            // Author found, increment borrow count
-            authorToUpdate.setBorrowCount(authorToUpdate.getBorrowCount() + 1);
         }
+        authorToUpdate.setBorrowCount(authorToUpdate.getBorrowCount() + 1);
     }
 
     public static void displayTopBorrowedAuthors(int count) {

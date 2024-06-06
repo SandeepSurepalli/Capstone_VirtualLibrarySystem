@@ -125,8 +125,8 @@ public class Main {
     }
 
     public static void displayTopAuthorsByBorrowCount() {
-        List<Author> topAuthors = BookManager.getTopAuthorsByBorrowCount();
-        for (Author author : topAuthors) {
+        List<Author> sortedAuthors = BookManager.getTopAuthorsByBorrowCount();
+        for (Author author : sortedAuthors) {
             System.out.println("Author: " + author.getName() + " - Borrow Count: " + author.getBorrowCount());
         }
     }
