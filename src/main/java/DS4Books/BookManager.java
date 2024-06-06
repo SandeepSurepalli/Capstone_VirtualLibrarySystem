@@ -143,6 +143,7 @@ public class BookManager {
     public static void addBorrowTransaction(BorrowTransaction transaction) {
         borrowTransactions.add(transaction);
         calculateGenreBorrowCounts(); // Ensure genre popularity is updated in real-time
+        displayGenrePopularity();
         System.out.println("Transaction logged: " + transaction);
     }
 
