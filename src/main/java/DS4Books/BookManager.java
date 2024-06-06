@@ -145,7 +145,7 @@ public class BookManager {
     public static void addBorrowTransaction(BorrowTransaction transaction) {
         borrowTransactions.add(transaction);
         Book borrowedBook = transaction.getBorrowedBook(); // Assuming getter
-        Author author = transaction.getBorrowedBook().getAuthor(); // Corrected to retrieve the author from the borrowed book
+        Author author = transaction.getBorrowedBook().getAuthor();
         updateAuthorPopularity(author);
         calculateGenreBorrowCounts(); // Ensure genre popularity is updated in real-time
         displayGenrePopularity();
@@ -495,4 +495,11 @@ public class BookManager {
                 // Collect the sorted authors into a List
                 .collect(Collectors.toList());
     }
+
+    public static List<Map.Entry<String, Author>> getAuthorPopularityRanking() {
+        return authorMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.comparingInt(Author::getBorrowCount).reversed()))
+                .collect(Collectors.toList());
+    }
+
 }

@@ -1,6 +1,7 @@
 package DS4Books;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import static DS4Books.BookManager.TimeFrame.MONTHLY;
@@ -117,6 +118,9 @@ public class Main {
                     System.out.println("Exiting the application...");
                     System.exit(0);
                     break;
+                case 14:
+                    displayTopAuthorsByBorrowCount();
+                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
@@ -129,6 +133,13 @@ public class Main {
         System.out.println("Top Authors Ranked by Borrow Counts:");
         for (Author author : topAuthors) {
             System.out.println(author.getName() + ": " + author.getBorrowCount() + " borrows");
+        }
+    }
+
+    public static void displayTopLookUp() {
+        List<Map.Entry<String, Author>> authorRanking = BookManager.getAuthorPopularityRanking();
+        for (Map.Entry<String, Author> entry : authorRanking) {
+            System.out.println("Author: " + entry.getKey() + ", Borrow Count: " + entry.getValue().getBorrowCount());
         }
     }
 }
