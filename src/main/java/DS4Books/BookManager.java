@@ -490,4 +490,12 @@ public class BookManager {
         }
     }
 
+    public static List<Author> getTopAuthorsByBorrowCount() {
+        // Create a stream from authorMap values
+        return authorMap.values().stream()
+                // Sort by borrow count (descending)
+                .sorted(Comparator.comparingInt(Author::getBorrowCount).reversed())
+                // Collect the sorted authors into a List
+                .collect(Collectors.toList());
+    }
 }

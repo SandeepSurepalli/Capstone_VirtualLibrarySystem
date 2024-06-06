@@ -111,7 +111,7 @@ public class Main {
                     BookManager.displayGenrePopularity();
                     break;
                 case 11:
-                    BookManager.displayTopBorrowedAuthors(2);
+                    displayTopAuthorsByBorrowCount();;
                     break;
                 case 12:
                     System.out.println("Exiting the application...");
@@ -121,6 +121,13 @@ public class Main {
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
+        }
+    }
+
+    public static void displayTopAuthorsByBorrowCount() {
+        List<Author> topAuthors = BookManager.getTopAuthorsByBorrowCount();
+        for (Author author : topAuthors) {
+            System.out.println("Author: " + author.getName() + " - Borrow Count: " + author.getBorrowCount());
         }
     }
 }
